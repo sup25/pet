@@ -1,28 +1,24 @@
-import React, { useState, useEffect } from 'react'
-
+import React from "react";
+import { Routes, Route, Outlet } from "react-router-dom";
+import Home from "./pages/Home/Home";
+import Navbar from "./component/Navbar/Navbar";
 const App = () => {
-  const [bEndData, SetbEndData] = useState([{}])
-  useEffect(() => {
-    fetch("/api").then(
-      response => response.json()
-    ).then(
-      data => {
-        SetbEndData(data)
-      }
-    )
-  }, [])
-
   return (
-    <div className='text-2xl   flex-col justify-center'>
-      {(typeof bEndData.users === "undefined") ? (
-        <p>loding</p>
-      ) : (
-        bEndData.users.map((user, id) => (
-          <p key={id}>{user}</p>
-        ))
-      )}
+    <div>
+      <Routes>
+        <Route
+          element={
+            <>
+              <Navbar />
+              <Outlet />
+            </>
+          }
+        >
+          <Route path="/" element={<Home />} />
+        </Route>
+      </Routes>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
