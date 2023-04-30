@@ -1,0 +1,33 @@
+Pet/
+├── backend/
+│   ├── controllers/
+│   │   ├── loginController.js
+│   │   ├── logoutController.js
+│   │   └── registerController.js
+│   ├── routes/
+│   │   ├── loginRouter.js
+│   │   ├── logoutRouter.js
+│   │   └── registerRouter.js
+|   |── Models/
+|   |   └──user.js
+│   └── server.js
+|   |── Utils/
+|   |   |──auth.js
+|   |   └──jwt.js
+└── frontend/ not Finalized
+    ├── public/
+    ├── src/
+    │   ├── components/
+    │   │   ├── LoginForm.js
+    │   │   ├── LogoutButton.js
+    │   │   ├── RegisterForm.js
+    │   │   └── WelcomeMessage.js
+    │   ├── pages/
+    │   │   ├── LoginPage.js
+    │   │   ├── LogoutPage.js
+    │   │   └── RegisterPage.js
+    │   ├── App.js
+    │   ├── index.js
+    │   └── utils.js
+    ├── package.json
+    └── README.md
