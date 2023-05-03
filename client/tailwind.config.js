@@ -20,9 +20,7 @@ module.exports = {
             maxWidth: {
                 default: "1440px",
             },
-            color: {
-                "0d5b46": "#0d5b46",
-            },
+
         },
     },
     plugins: [

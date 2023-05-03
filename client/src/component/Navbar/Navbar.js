@@ -6,7 +6,7 @@ import { Register } from '../Register'
 const Navbar = () => {
     return (
         <>
-            <div className='bg-[#0d5b46] h-20 section flex justify-between   items-center' >
+            <div className='bg-[#0d5b46] h-20 section flex justify-between  items-center shadow-[0_5px_10px_0px_rgba(0,0,0,0.5)]' >
                 <Logo className="w-44 h-auto" />
                 <div className='flex text-white gap-4  '>
                     Home
@@ -23,3 +23,4 @@ const Navbar = () => {
 }
 
 export default Navbar
+
