@@ -20,6 +20,9 @@ module.exports = {
             maxWidth: {
                 default: "1440px",
             },
+            backgroundImage: {
+
+            }
 
         },
     },
