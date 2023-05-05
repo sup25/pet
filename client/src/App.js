@@ -1,8 +1,10 @@
 import React from "react";
 import { Routes, Route, Outlet } from "react-router-dom";
-import Slider from "./pages/Home/Slider";
+
 import Navbar from "./component/Navbar/Navbar";
 import { Footer } from "./component/Footer/Footer";
+import Pet from "./Pet";
+
 const App = () => {
   return (
     <div>
@@ -16,9 +18,9 @@ const App = () => {
             </>
           }
         >
-          <Route path="/" element={<Slider />} />
-
+          <Route path="/" element={<Pet />} />
         </Route>
+
       </Routes>
     </div>
   );
