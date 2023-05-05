@@ -1,7 +1,8 @@
 import React from "react";
 import { Routes, Route, Outlet } from "react-router-dom";
-import Home from "./pages/Home/Home";
+import Slider from "./pages/Home/Slider";
 import Navbar from "./component/Navbar/Navbar";
+import { Footer } from "./component/Footer/Footer";
 const App = () => {
   return (
     <div>
@@ -11,10 +12,12 @@ const App = () => {
             <>
               <Navbar />
               <Outlet />
+              <Footer />
             </>
           }
         >
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Slider />} />
+
         </Route>
       </Routes>
     </div>

@@ -5,7 +5,7 @@ module.exports = {
     content: [
         "./app/**/*.{js,ts,jsx,tsx}",
         "./pages/**/*.{js,ts,jsx,tsx}",
-        "./components/**/*.{js,ts,jsx,tsx}",
+        "./component/**/*.{js,ts,jsx,tsx}",
 
 
         // Or if using `src` directory:
@@ -41,6 +41,16 @@ module.exports = {
                 ".container": {
                     maxWidth: theme("maxWidth.default"),
                 },
+                " .carousel-img": {
+                    position: "absolute",
+                    top: '0',
+                    left: '0',
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    transition: ' opacity 0.5s ease-in-out',
+                }
+
             })
 
         })

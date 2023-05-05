@@ -10,53 +10,52 @@ const carImages = [
     { id: 3, src: car3 }
 ];
 
-const Home = () => {
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+const Slider = () => {
+    const [current, setCurrent] = useState(0);
 
     const showNextImage = () => {
-        if (currentImageIndex === carImages.length - 1) {
-            setCurrentImageIndex(0);
+        if (current === carImages.length - 1) {
+            setCurrent(0);
         } else {
-            setCurrentImageIndex(currentImageIndex + 1);
+            setCurrent(current + 1);
         }
     };
 
     const showPreviousImage = () => {
-        if (currentImageIndex === 0) {
-            setCurrentImageIndex(carImages.length - 1);
+        if (current === 0) {
+            setCurrent(carImages.length - 1);
         } else {
-            setCurrentImageIndex(currentImageIndex - 1);
+            setCurrent(current - 1);
         }
     };
 
     return (
-        <div className="my-10">
+        <div className="my-5">
             <div>
-                <div className="h-96 container bg-slate-500 flex flex-row w-full items-center overflow-hidden relative">
+                <div className="md:h-[calc(100vh-90px)] h-[calc(90vh-90px)] flex w-full items-center overflow-hidden  relative">
                     {carImages.map((img, index) => (
                         <div
                             key={index}
-                            className={`flex flex-col w-full h-full transition ease-in-out duration-1000 ${index === currentImageIndex ? "block" : "hidden"
+                            className={`flex flex-col w-full h-full ${index === current ? "opacity-100 transition-opacity duration-1000 ease-in-out" : "opacity-0"
                                 }`}
                         >
                             <img
                                 src={img.src}
                                 alt={`Car ${img.id}`}
-                                className="w-full h-full object-cover  "
+                                className={`carousel-img ${index === current ? "block" : "hidden"}`}
                             />
+
                         </div>
                     ))}
-
-                    <div className="absolute top-2/4  left-5  ">
-                        <button onClick={showPreviousImage}>
+                    <div className='w-fit flex absolute left-0 right-0 m-auto gap-10 md:bottom-28 bottom-10'>
+                        <div className="  flex items-center cursor-pointer" onClick={showPreviousImage}>
                             <BsFillArrowLeftCircleFill className='w-10 md:w-16 h-auto opacity-30 hover:opacity-100' />
-                        </button>
-                    </div>
-                    <div className="absolute top-2/4 right-5 ">
-                        <button onClick={showNextImage}>
+                        </div>
+                        <div className="  flex items-center cursor-pointer " onClick={showNextImage}>
                             <BsFillArrowRightCircleFill className=' w-10 md:w-16 h-auto opacity-30 hover:opacity-100' />
-                        </button>
+                        </div>
                     </div>
+
 
                 </div>
             </div>
@@ -64,4 +63,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default Slider;
