@@ -1,12 +1,12 @@
 import React from 'react'
 import Slider from './pages/Home/Slider'
-import { Rest } from './pages/Home/Rest'
+import { About } from './pages/Home/About'
 
 const Pet = () => {
     return (
         <>
             <Slider />
-            <Rest />
+            <About />
         </>
 
     )
