@@ -11,7 +11,7 @@ export const About = () => {
                 </div>
                 <div className=" flex flex-col  w-full h-fit max-w-3xl  justify-center my-2  gap-5  ">
                     <h1 className="text-3xl md:text-5xl w-full h-auto text-[#0d5b46] font-bold underline underline-offset-8">About us</h1>
-                    <p className="text-justify  w-full h-auto text-base md:text-lg ">
+                    <p className="text-justify  w-full h-auto text-base md:text-lg  font-semibold xl:text-lg  ">
                         Our company is dedicated to providing a platform that connects pets in
                         need with loving and responsible owners. We believe that every pet
                         deserves a happy and healthy home, and we strive to make the adoption
