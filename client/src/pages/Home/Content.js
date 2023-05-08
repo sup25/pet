@@ -32,7 +32,7 @@ export const Content = () => {
                 <div className="flex flex-col md:flex-row flex-wrap justify-center gap-7">
                     {contents.map((item, index) => (
                         <div key={index} className=" flex justify-center">
-                            <div className="md:w-[450px] h-auto  p-6 bg-white border border-gray-200 rounded-2xl shadow-2xl flex flex-col gap-7">
+                            <div className="md:w-[450px] h-auto  p-6 bg-white border border-gray-200 rounded-2xl shadow-xl flex flex-col gap-7">
                                 <div className="flex justify-center ">{item.icon}</div>
                                 <div className="text-2xl font-bold xl:mt-2 xl:text-3xl flex justify-center w-full">
                                     {item.title}
