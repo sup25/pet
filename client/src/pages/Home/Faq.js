@@ -36,11 +36,11 @@ const content = [
 ];
 export const Faq = () => {
   return (
-    <div className="section flex flex-col gap-5 py-5 bg-[#0d5b46]">
+    <div className="section flex flex-col gap-5 py-10  bg-[#0d5b46]">
       {content.map((item, index) => (
-        <div key={index} className="text-white">
+        <div key={index} className="text-white  flex flex-col gap-2 ">
           <p className="text-3xl font-medium ">{item.question}</p>
-          <span className="text-xl font-thin ">{item.answer}</span>
+          <span className="text-xl font-thin  ">{item.answer}</span>
         </div>
       ))}
     </div>

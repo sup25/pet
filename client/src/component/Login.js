@@ -12,8 +12,11 @@ const Login = () => {
         <form className="md:w-2/5 w-full height-fit px-3 flex items-center">
           <div className="flex flex-col gap-5 w-full h-auto">
             <div className="text-2xl md:text-4xl ">
-              Your personal gateway to our world
+              Welcome back to Pawsitively Perfect
             </div>
+            <span className="text-base text-gray-400 ">
+              where every pet deserves a loving home
+            </span>
             <input
               type="email"
               name="email"
@@ -36,7 +39,7 @@ const Login = () => {
             </button>
             <div className="text-xl mb-2">
               Doesnot have an account{" "}
-              <Link to="/signup" className="text-[#0d5b46]">
+              <Link to="/register" className="text-[#0d5b46]">
                 SignUp
               </Link>
             </div>
