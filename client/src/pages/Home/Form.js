@@ -1,4 +1,5 @@
 import React from "react";
+import { BsFacebook, BsLinkedin } from "react-icons/bs";
 
 const ContactForm = () => {
   return (
@@ -9,11 +10,16 @@ const ContactForm = () => {
       >
         <div className="flex flex-col">
           <div className="text-3xl  md:text-5xl font-bold">Contact us</div>
+
           <p className="text-left my-4 w-full h-auto text-base md:text-lg  font-semibold xl:text-lg  ">
             We value feedback and are always happy to hear from our users. If
             you have any questions, comments, or concerns, please don't hesitate
             to reach out to us.
           </p>
+          <div className="flex gap-3">
+            <BsFacebook className="text-[#0d5b46]  w-10 h-auto" />
+            <BsLinkedin className="text-[#0d5b46] w-10 h-auto" />
+          </div>
         </div>
 
         <div className=" flex flex-col  w-4/5 h-fit max-w-3xl   my-2   ">
