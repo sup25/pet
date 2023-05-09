@@ -1,10 +1,11 @@
 import React from "react";
 import { BsFillInfoCircleFill } from "react-icons/bs";
-
+import { Animate } from "../../animation/animate";
+const FadeIn = Animate.FadeIn;
 export const About = () => {
   return (
     <div className=" flex justify-center mx-5 my-20 md:my-20">
-      <div
+      <FadeIn
         className=" section flex flex-col md:flex-row md:h-fit items-center  
             overflow-hidden  gap-10  bg-white  rounded-xl shadow-xl"
       >
@@ -24,7 +25,7 @@ export const About = () => {
             pet ownership and providing ongoing support for pet owners.
           </p>
         </div>
-      </div>
+      </FadeIn>
     </div>
   );
 };

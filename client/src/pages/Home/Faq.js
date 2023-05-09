@@ -1,5 +1,6 @@
 import React from "react";
-
+import { Animate } from "../../animation/animate";
+const FadeUp = Animate.FadeUp;
 const content = [
   {
     question: "Q: What is Pawsitively Perfect?",
@@ -38,10 +39,10 @@ export const Faq = () => {
   return (
     <div className="section flex flex-col gap-5 py-10  bg-[#0d5b46]">
       {content.map((item, index) => (
-        <div key={index} className="text-white  flex flex-col gap-2 ">
+        <FadeUp key={index} className="text-white  flex flex-col gap-2 ">
           <p className="text-3xl font-medium ">{item.question}</p>
           <span className="text-xl font-thin  ">{item.answer}</span>
-        </div>
+        </FadeUp>
       ))}
     </div>
   );
