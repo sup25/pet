@@ -1,28 +1,30 @@
-require('dotenv').config()
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const loginRouter = require("./routes/login");
 const logoutRouter = require("./routes/logout");
 const registerRouter = require("./routes/register");
-
+const cors = require("cors");
 
 const app = express();
 
 // connect to MongoDB
-mongoose.connect(process.env.MONGO_URL, {
+mongoose
+  .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-
-})
-    .then(() => {
-        console.log('Connected to MongoDB');
-    })
-    .catch((err) => {
-        console.error('Error connecting to MongoDB', err);
-    });
+  })
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((err) => {
+    console.error("Error connecting to MongoDB", err);
+  });
 
 // middleware
 app.use(express.json());
+
+app.use(cors());
 
 // routes
 app.use("/login", loginRouter);
