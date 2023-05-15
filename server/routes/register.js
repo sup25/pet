@@ -4,7 +4,7 @@ const jwt = require("../utils/jwt");
 const User = require("../Models/User");
 
 // POST /register
-router.post("/api/register", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const { username, email, password } = req.body;
     // check if user already exists
