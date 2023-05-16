@@ -7,21 +7,6 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
 });
 
-// Hash the password before saving the user to the database
-userSchema.pre("save", async function (next) {
-  const user = this;
-  if (!user.isModified("password")) {
-    return next();
-  }
-  try {
-    const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(user.password, salt);
-    next();
-  } catch (err) {
-    return next(err);
-  }
-});
-
 const User = mongoose.model("User", userSchema);
 
 module.exports = User;

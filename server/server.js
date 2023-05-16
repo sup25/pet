@@ -5,10 +5,10 @@ const loginRoute = require("./routes/login");
 const logoutRoute = require("./routes/logout");
 const registerRoute = require("./routes/register");
 const cors = require("cors");
-const User = require("./Models/User");
+const bodyParser = require("body-parser");
 
 const app = express();
-
+app.use(bodyParser.json());
 // connect to MongoDB
 mongoose
   .connect(process.env.MONGO_URL, {
@@ -22,7 +22,6 @@ mongoose
     console.error("Error connecting to MongoDB", err);
   });
 
-User();
 // middleware
 app.use(express.json());
 
