@@ -1,19 +1,46 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import DogLog from "../Assets/DogOut";
 import axios from "axios";
 
 export const Register = () => {
-  const sendData = async (e) => {
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const form = e.target;
-    const formData = new FormData(form);
 
     try {
-      const response = await axios.post("/register", formData);
+      const response = await axios.post(
+        "http://localhost:5000/register",
+        formData
+      );
       console.log(response.data); // Handle the response from the server
+
+      // Reset the form and clear any error messages
+      setFormData({ username: "", email: "", password: "" });
+      setErrorMessage("");
     } catch (error) {
       console.error(error);
       // Handle the error
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        setErrorMessage(error.response.data.message);
+      } else {
+        setErrorMessage("An error occurred during registration");
+      }
     }
   };
 
@@ -25,7 +52,7 @@ export const Register = () => {
         </div>
         <form
           className="md:w-2/5 w-full height-fit px-3 flex items-center"
-          onSubmit={sendData}
+          onSubmit={handleSubmit}
         >
           <div className="flex flex-col gap-5 w-full h-auto">
             <div className="text-2xl md:text-4xl">
@@ -39,6 +66,8 @@ export const Register = () => {
               name="username"
               required
               placeholder="Name"
+              value={formData.username}
+              onChange={handleChange}
               className="w-full h-auto py-2 rounded-2xl flex px-4 border border-[#0d5b46]"
             />
             <input
@@ -46,6 +75,8 @@ export const Register = () => {
               name="email"
               required
               placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
               className="w-full h-auto py-2 rounded-2xl flex px-4 border border-[#0d5b46]"
             />
             <input
@@ -53,8 +84,11 @@ export const Register = () => {
               name="password"
               required
               placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
               className="w-full h-auto py-2 rounded-2xl flex px-4 border border-[#0d5b46]"
             />
+            {errorMessage && <div className="text-red-500">{errorMessage}</div>}
             <button
               type="submit"
               className="w-1/2 h-auto justify-center text-white font-bold text-xl py-1 rounded-3xl flex px-4 bg-[#0d5b46] hover:bg-[#199e7a]"
@@ -73,3 +107,5 @@ export const Register = () => {
     </div>
   );
 };
+
+export default Register;

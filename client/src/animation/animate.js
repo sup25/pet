@@ -179,7 +179,10 @@ const RollOut = ({ children, ...rest }) => (
 
 const RollIn = ({ children, ...rest }) => (
   <Animation
-    from={{ opacity: 0, transform: "translate3d(-100%, 0, 0) rotate(-120deg)" }}
+    from={{
+      opacity: 0.5,
+      transform: "translate3d(-100%, 0, 0) rotate(-120deg)",
+    }}
     to={{ opacity: 1, transform: "translateZ(0)" }}
     {...rest}
   >
