@@ -12,7 +12,7 @@ const Navbar = () => {
   const toggleMenu = () => {
     setShow(!show);
   };
-
+  //use effect metho may solve
   return (
     <>
       <div className="bg-[#0d5b46] h-20 section flex justify-between  items-center shadow-[0_5px_10px_0px_rgba(0,0,0,0.5)] ">
