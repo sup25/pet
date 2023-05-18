@@ -5,25 +5,28 @@ import { Register } from "./component/Register";
 import Navbar from "./component/Navbar/Navbar";
 import { Footer } from "./component/Footer/Footer";
 import Pet from "./Pet";
+import { AuthProvider } from "./Context/authContext";
 
 const App = () => {
   return (
     <div>
-      <Routes>
-        <Route
-          element={
-            <>
-              <Navbar />
-              <Outlet />
-              <Footer />
-            </>
-          }
-        >
-          <Route path="/" element={<Pet />} />
-        </Route>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route
+            element={
+              <>
+                <Navbar />
+                <Outlet />
+                <Footer />
+              </>
+            }
+          >
+            <Route path="/" element={<Pet />} />
+          </Route>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </AuthProvider>
     </div>
   );
 };

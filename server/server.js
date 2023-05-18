@@ -4,7 +4,9 @@ const mongoose = require("mongoose");
 const loginRoute = require("./routes/login");
 const logoutRoute = require("./routes/logout");
 const registerRoute = require("./routes/register");
+const userRoute = require("./routes/userRoute");
 const cors = require("cors");
+
 const bodyParser = require("body-parser");
 
 const app = express();
@@ -31,6 +33,7 @@ app.use(cors());
 app.use("/login", loginRoute);
 app.use("/logout", logoutRoute);
 app.use("/register", registerRoute);
+app.use("/user", userRoute);
 
 const PORT = process.env.PORT || 5000;
 
