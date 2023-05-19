@@ -1,9 +1,6 @@
 Pet/
 ├── backend/
-│   ├── controllers/
-│   │   ├── loginController.js
-│   │   ├── logoutController.js
-│   │   └── registerController.js
+│   │
 │   ├── routes/
 │   │   ├── loginRouter.js
 │   │   ├── logoutRouter.js

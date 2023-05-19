@@ -3,21 +3,31 @@ import { Link } from "react-router-dom";
 import Logo from "../../Assets/logo";
 import { GiHamburgerMenu, GiCancel } from "react-icons/gi";
 import { HiHome } from "react-icons/hi";
-import { FiLogIn } from "react-icons/fi";
-import { BsFillPersonPlusFill } from "react-icons/bs";
+import { FiLogIn, FiLogOut } from "react-icons/fi";
+import { IoMdPersonAdd } from "react-icons/io";
+
 import axios from "axios";
+const contents = [
+  {
+    link: <Link to="/login">Login</Link>,
+    icon: <FiLogIn className="w-auto h-8  " />,
+  },
+  {
+    link: <Link to="/logout">Register</Link>,
+    icon: <IoMdPersonAdd className="w-auto h-8  " />,
+  },
+];
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
-  const [user, setUser] = useState(null); // State to store user data
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const fetchUserData = async () => {
+    const fetchUser = async () => {
       try {
         const token = localStorage.getItem("token");
         if (token) {
-          // If token exists, send request to fetch user data
-          const response = await axios.get("http://localhost:5000/user", {
+          const response = await axios.get("http://localhost:5000/user/user", {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -29,25 +39,42 @@ const Navbar = () => {
       }
     };
 
-    fetchUserData();
+    fetchUser();
   }, []);
 
   const toggleMenu = () => {
     setShow(!show);
   };
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
 
   return (
     <>
-      <div className="bg-[#0d5b46] h-20 section flex justify-between  items-center shadow-[0_5px_10px_0px_rgba(0,0,0,0.5)] ">
-        <div className="container flex  items-center">
+      <div className="bg-[#0d5b46] h-20 section flex justify-between items-center shadow-[0_5px_10px_0px_rgba(0,0,0,0.5)]">
+        <div className="container flex items-center">
           <div className="container flex justify-between items-center">
             <Link to="/">
               <Logo className="w-44 h-auto" />
             </Link>
-            <div className="text-white gap-4 text-xl font-medium md:flex hidden">
+            <div className="text-white gap-4 text-xl font-medium md:flex items-center hidden">
               <Link to="/">Home</Link>
               {user ? (
-                <span>{user.name}</span>
+                <>
+                  <div className="flex items-center justify-between">
+                    <span className="text-white font-bold text-center border flex bg-slate-200/40  items-center text-xs rounded-full h-12 w-12 py-2 px-2 border-gray-400 ">
+                      {user}
+                    </span>{" "}
+                    <button
+                      className="py-2 px-2 flex items-center justify-center"
+                      onClick={handleLogout}
+                    >
+                      <FiLogOut />
+                      Logout
+                    </button>
+                  </div>
+                </>
               ) : (
                 <>
                   <Link to="/login">Login</Link>
@@ -73,29 +100,36 @@ const Navbar = () => {
                 <div className="gap-5 md:hidden absolute py-5 px-2 top-20 right-0 flex flex-col p-0 m-0 w-[calc(100vh-500px)] h-[calc(100vh-130px)] whitespace-nowrap bg-white rounded-l-lg shadow-lg z-50">
                   <Link
                     to="/"
-                    className="flex items-center gap-3 text-2xl border-b-2 border-gray-300 rounded py-1 px-1"
+                    className="flex items-center gap-3 text-xl border-b-2 border-gray-300 rounded py-1 px-1"
                   >
-                    <HiHome />
+                    <HiHome className="w-auto h-8" />
                     Home
                   </Link>
                   {user ? (
-                    <span>{user.username}</span>
+                    <>
+                      <div className="flex items-center justify-between flex-col">
+                        <span className="text-black font-bold text-center border flex bg-slate-200/40  items-center text-xs rounded-full h-12 w-12 py-2 px-2 border-gray-400 ">
+                          {user}
+                        </span>{" "}
+                        <button
+                          className="py-2 px-2 flex  items-center justify-center"
+                          onClick={handleLogout}
+                        >
+                          <FiLogOut />
+                          Logout
+                        </button>
+                      </div>
+                    </>
                   ) : (
                     <>
-                      <Link
-                        to="/login"
-                        className="flex items-center gap-3 text-2xl border-b-2 border-gray-300 rounded py-1 px-1"
-                      >
-                        <FiLogIn />
-                        Login
-                      </Link>
-                      <Link
-                        to="/register"
-                        className="flex items-center gap-3 text-2xl border-b-2 border-gray-300 rounded py-1 px-1"
-                      >
-                        <BsFillPersonPlusFill />
-                        Register
-                      </Link>
+                      {contents.map((item, index) => (
+                        <div
+                          className="flex items-center gap-3 text-xl border-b-2 border-gray-300 rounded py-1 px-1"
+                          key={index}
+                        >
+                          {item.icon} {item.link}
+                        </div>
+                      ))}
                     </>
                   )}
                 </div>

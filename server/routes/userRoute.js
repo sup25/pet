@@ -4,7 +4,13 @@ const jwt = require("jsonwebtoken");
 const User = require("../Models/User");
 
 router.get("/", async (req, res) => {
-  res.send("API is running");
+  try {
+    const users = await User.find();
+    res.json(users);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Server error" });
+  }
 });
 
 router.get("/user", async (req, res) => {
@@ -17,7 +23,7 @@ router.get("/user", async (req, res) => {
     }
 
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-    const userId = decodedToken.id;
+    const userId = decodedToken.userId;
 
     const user = await User.findById(userId);
 
@@ -25,7 +31,7 @@ router.get("/user", async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    res.json({ user });
+    res.json({ user: user.username }); // Only send the username in the response
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Server error" });

@@ -18,6 +18,7 @@ const Login = () => {
       if (response.data.token) {
         const token = response.data.token;
         localStorage.setItem("token", token);
+
         window.location.href = "/";
       } else {
         setError("Invalid email or password");
