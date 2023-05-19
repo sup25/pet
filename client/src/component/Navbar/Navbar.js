@@ -7,6 +7,7 @@ import { FiLogIn, FiLogOut } from "react-icons/fi";
 import { IoMdPersonAdd } from "react-icons/io";
 
 import axios from "axios";
+import Account from "../Account";
 const contents = [
   {
     link: <Link to="/login">Login</Link>,
@@ -19,9 +20,23 @@ const contents = [
 ];
 
 const Navbar = () => {
+  //ham and cross
   const [show, setShow] = useState(false);
+  const toggleMenu = () => {
+    setShow(!show);
+  };
+
+  //Display user credential in nav
   const [user, setUser] = useState(null);
 
+  //Dropdown
+  const [expanded, setExpanded] = useState(false);
+
+  const toggleDropdown = () => {
+    setExpanded(!expanded);
+  };
+
+  //fetching the user data in navbar
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -42,9 +57,6 @@ const Navbar = () => {
     fetchUser();
   }, []);
 
-  const toggleMenu = () => {
-    setShow(!show);
-  };
   const handleLogout = () => {
     localStorage.removeItem("token");
     window.location.reload();
@@ -62,17 +74,33 @@ const Navbar = () => {
               <Link to="/">Home</Link>
               {user ? (
                 <>
-                  <div className="flex items-center justify-between">
-                    <span className="text-white font-bold text-center border flex bg-slate-200/40  items-center text-xs rounded-full h-12 w-12 py-2 px-2 border-gray-400 ">
-                      {user}
-                    </span>{" "}
-                    <button
-                      className="py-2 px-2 flex items-center justify-center"
-                      onClick={handleLogout}
-                    >
-                      <FiLogOut />
-                      Logout
-                    </button>
+                  <div className="" onClick={toggleDropdown}>
+                    <div className="flex flex-col items-center justify-between ">
+                      <span className="text-white font-bold cursor-pointer justify-center border flex bg-slate-200/40  items-center text-xs rounded-full h-12 w-12 py-2 px-2 border-gray-400 ">
+                        {user}
+                      </span>{" "}
+                      {expanded && (
+                        <>
+                          <div className="py-4 px-2 bg-[#0d5b46]  rounded-3xl text-base flex-col  items-center justify-center absolute top-16 z-50">
+                            <div>
+                              <Link
+                                to="/account"
+                                className="flex gap-3 hover:text-orange-300 flex-col border-b-2 border-gray-300 rounded "
+                              >
+                                <Account />
+                              </Link>
+                            </div>
+
+                            <button onClick={handleLogout}>
+                              <div className="flex hover:text-orange-300 mt-3 items-center border-b-2 border-gray-300 rounded">
+                                <FiLogOut />
+                                Logout
+                              </div>
+                            </button>
+                          </div>
+                        </>
+                      )}
+                    </div>
                   </div>
                 </>
               ) : (

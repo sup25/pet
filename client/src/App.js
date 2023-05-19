@@ -6,6 +6,7 @@ import Navbar from "./component/Navbar/Navbar";
 import { Footer } from "./component/Footer/Footer";
 import Pet from "./Pet";
 import { AuthProvider } from "./Context/authContext";
+import Account from "./component/Account";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/account" element={<Account />} />
         </Routes>
       </AuthProvider>
     </div>
