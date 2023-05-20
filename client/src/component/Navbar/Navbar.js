@@ -7,36 +7,36 @@ import { FiLogIn, FiLogOut } from "react-icons/fi";
 import { IoMdPersonAdd } from "react-icons/io";
 
 import axios from "axios";
-import Account from "../Account";
+
 const contents = [
   {
     link: <Link to="/login">Login</Link>,
-    icon: <FiLogIn className="w-auto h-8  " />,
+    icon: <FiLogIn className="w-auto h-8" />,
   },
   {
-    link: <Link to="/logout">Register</Link>,
-    icon: <IoMdPersonAdd className="w-auto h-8  " />,
+    link: <Link to="/register">Register</Link>,
+    icon: <IoMdPersonAdd className="w-auto h-8" />,
   },
 ];
 
 const Navbar = () => {
-  //ham and cross
+  // ham and cross
   const [show, setShow] = useState(false);
   const toggleMenu = () => {
     setShow(!show);
   };
 
-  //Display user credential in nav
+  // Display user credential in nav
   const [user, setUser] = useState(null);
 
-  //Dropdown
+  // Dropdown
   const [expanded, setExpanded] = useState(false);
 
   const toggleDropdown = () => {
     setExpanded(!expanded);
   };
 
-  //fetching the user data in navbar
+  // Fetching the user data in navbar
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -81,13 +81,13 @@ const Navbar = () => {
                       </span>{" "}
                       {expanded && (
                         <>
-                          <div className="py-4 px-2 bg-[#0d5b46]  rounded-3xl text-base flex-col  items-center justify-center absolute top-16 z-50">
+                          <div className="py-4 px-2 bg-[#0d5b46] rounded-3xl text-base flex-col items-center justify-center absolute top-16 z-50">
                             <div>
                               <Link
                                 to="/account"
-                                className="flex gap-3 hover:text-orange-300 flex-col border-b-2 border-gray-300 rounded "
+                                className="flex gap-3 hover:text-orange-300 flex-col border-b-2 border-gray-300 rounded"
                               >
-                                <Account />
+                                Account
                               </Link>
                             </div>
 

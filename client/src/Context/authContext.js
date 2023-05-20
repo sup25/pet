@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     // Clear the user data from the context state
     setUser(null);
-    // Remove the token from localStorage or any other storage mechanism you are using
+    // Remove the token from localStorage
     localStorage.removeItem("token");
   };
 
