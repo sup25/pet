@@ -1,34 +1,14 @@
 import { Routes, Route, Navigate, Link, Outlet } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useFetchUser } from "./Api/Api";
 import Login from "./component/Login";
 import { Register } from "./component/Register";
 import Navbar from "./component/Navbar/Navbar";
 import { Footer } from "./component/Footer/Footer";
 import Pet from "./Pet";
 import Account from "./component/Account";
-import axios from "axios";
 
 const App = () => {
-  const [user, setUser] = useState(null);
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        if (token) {
-          const response = await axios.get("http://localhost:5000/user/user", {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-          setUser(response.data.user);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchUser();
-  }, []);
+  const user = useFetchUser();
 
   const NotFound = () => {
     return (

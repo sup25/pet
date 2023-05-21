@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../Assets/logo";
 import { GiHamburgerMenu, GiCancel } from "react-icons/gi";
 import { HiHome } from "react-icons/hi";
 import { FiLogIn, FiLogOut } from "react-icons/fi";
 import { IoMdPersonAdd } from "react-icons/io";
-
-import axios from "axios";
+import { useFetchUser } from "../../Api/Api";
 
 const contents = [
   {
@@ -20,14 +19,12 @@ const contents = [
 ];
 
 const Navbar = () => {
+  const user = useFetchUser();
   // ham and cross
   const [show, setShow] = useState(false);
   const toggleMenu = () => {
     setShow(!show);
   };
-
-  // Display user credential in nav
-  const [user, setUser] = useState(null);
 
   // Dropdown
   const [expanded, setExpanded] = useState(false);
@@ -37,25 +34,6 @@ const Navbar = () => {
   };
 
   // Fetching the user data in navbar
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        if (token) {
-          const response = await axios.get("http://localhost:5000/user/user", {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-          setUser(response.data.user);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchUser();
-  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");

@@ -1,15 +1,21 @@
-import React from "react";
+import { useFetchUser } from "../Api/Api";
 import { AiFillCamera } from "react-icons/ai";
 
 const Account = () => {
+  const user = useFetchUser();
+
   return (
     <div className="section py-20   ">
       <div className="flex py-5 flex-col px-5 justify-evenly md:flex-row w-full h-auto gap-10 bg-white rounded-2xl shadow-xl">
-        <div className="flex justify-center items-center">
-          <div className="w-[300px] h-[300px] flex  items-end bg-gray-300 rounded-xl shadow-xl">
-            <div className="w-full h-12 gap-2 text-xl text-white font-bold  rounded flex justify-center items-center bg-[#0d5b46]">
-              <AiFillCamera /> <span>Change your picture</span>
-            </div>
+        <div className="flex flex-col justify-center items-center">
+          <div className="w-[300px] h-[250px] flex flex-col items-center justify-center bg-gray-300 rounded-t-xl shadow-xl">
+            <div className=" text-3xl">{user}</div>
+          </div>
+          <div className="w-full h-12 gap-2 justify-center text-xl text-white font-bold  rounded flex  items-center bg-[#0d5b46]">
+            <AiFillCamera />
+            <span className="flex justify-center items-center">
+              Change your picture
+            </span>
           </div>
         </div>
 
