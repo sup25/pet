@@ -1,24 +1,71 @@
 import React, { useState } from "react";
 import { useFetchUser } from "../Api/Api";
 import { AiFillCamera } from "react-icons/ai";
+import axios from "axios";
 
 const Account = () => {
   const user = useFetchUser();
+  const [profilePicture, setProfilePicture] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [profileChanged, setProfileChanged] = useState(false);
 
   const handleProfilePictureUpload = async () => {
     if (selectedFile) {
       try {
         const formData = new FormData();
-        formData.append("profilePic", selectedFile);
+        formData.append("profilePicture", selectedFile);
 
-        await fetch("http://localhost:5000/profilePic", {
-          method: "POST",
-          body: formData,
-        });
+        const token = localStorage.getItem("token");
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+
+        const response = await axios.post(
+          "http://localhost:5000/ProfilePic",
+          formData,
+          config
+        );
+
+        console.log(response.data); // Check the response data structure
+
+        // Update the profile picture in the state
+        setProfilePicture(URL.createObjectURL(selectedFile));
+        // Save the profile picture to local storage
+        localStorage.setItem(
+          "profilePicture",
+          URL.createObjectURL(selectedFile)
+        );
+
+        setSelectedFile(null);
+        setProfileChanged(true); // Set profileChanged to true after successful upload
+
+        setTimeout(() => {
+          setProfileChanged(false);
+        }, 5000);
       } catch (error) {
         console.error("Error uploading profile picture:", error);
       }
+    } else {
+      // No selected file, reset the profile picture state and show the option to upload again
+      setProfilePicture(null);
+      setSelectedFile(null);
+    }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Add your form submission logic here
+  };
+
+  const handleFileInputChange = (e) => {
+    const file = e.target.files[0];
+    setSelectedFile(file);
+    setProfileChanged(false); // Reset profileChanged when selecting a new file
+    if (file) {
+      const objectURL = URL.createObjectURL(new Blob([file]));
+      setProfilePicture(objectURL);
     }
   };
 
@@ -27,18 +74,25 @@ const Account = () => {
       <div className="flex py-5 flex-col px-5 justify-evenly md:flex-row w-full h-auto gap-10 bg-white rounded-2xl shadow-xl">
         <div className="flex flex-col justify-center items-center">
           <div className="w-[300px] h-[250px] flex flex-col items-center justify-center bg-gray-300 rounded-t-xl shadow-xl">
-            <div className="text-3xl">{user}</div>
+            {profilePicture ? (
+              <img
+                src={profilePicture}
+                alt="ProfilePicture"
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <div className="text-3xl">{user}</div>
+            )}
           </div>
+
           <label
+            onClick={handleProfilePictureUpload}
             htmlFor="fileInput"
             className="w-[300px] cursor-pointer h-12 gap-2 justify-center text-xl text-white font-bold rounded flex items-center bg-[#0d5b46]"
           >
-            <AiFillCamera />
-            <span
-              onClick={handleProfilePictureUpload}
-              className="flex justify-center items-center"
-            >
-              Change your picture
+            {profilePicture ? <AiFillCamera /> : ""}
+            <span className="flex justify-center items-center">
+              {profilePicture ? "Change profile" : "Upload profile picture"}
             </span>
           </label>
           <input
@@ -46,14 +100,23 @@ const Account = () => {
             type="file"
             accept="image/*"
             style={{ display: "none" }}
-            onChange={(e) => setSelectedFile(e.target.files[0])}
+            disabled={selectedFile !== null}
+            onChange={handleFileInputChange}
           />
+          {profileChanged && (
+            <div className="text-green-500">
+              Profile picture changed successfully!
+            </div>
+          )}
         </div>
 
-        <form className="md:w-1/2 w-full height-fit px-3 flex items-center">
+        <form
+          className="md:w-1/2 w-full height-fit px-3 flex items-center"
+          onSubmit={handleSubmit}
+        >
           <div className="flex flex-col gap-5 w-full h-auto">
             <div className="text-2xl md:text-4xl">
-              Change your account credential
+              Change your account credentials
             </div>
             <span className="text-base text-gray-400">Pawsitively Perfect</span>
             <input
@@ -88,6 +151,7 @@ const Account = () => {
             <button
               type="submit"
               className="w-1/4 h-auto justify-center text-white font-bold text-xl py-1 rounded-3xl flex px-4 bg-[#0d5b46] hover:bg-[#199e7a]"
+              disabled={!selectedFile}
             >
               Save
             </button>
