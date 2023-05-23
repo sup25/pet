@@ -1,32 +1,16 @@
 import React, { useState } from "react";
 import Dog from "../Assets/Dog";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { handleSubmit } from "../Api/Api";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post("http://localhost:5000/login", {
-        email,
-        password,
-      });
-      if (response.data.token) {
-        const token = response.data.token;
-        localStorage.setItem("token", token);
-
-        window.location.href = "/";
-      } else {
-        setError("Invalid email or password");
-      }
-    } catch (error) {
-      console.log(error);
-      setError("Login failed");
-    }
+    handleSubmit(email, password, setError);
   };
 
   return (
@@ -36,7 +20,7 @@ const Login = () => {
           <Dog className="md:w-full w-4/5 h-auto" />
         </div>
         <form
-          onSubmit={handleSubmit}
+          onSubmit={handleFormSubmit}
           className="md:w-2/5 w-full height-fit px-3 flex items-center"
         >
           <div className="flex flex-col gap-5 w-full h-auto">
