@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import DogLog from "../Assets/DogOut";
-import axios from "axios";
+import { registerUser } from "../Api/Api";
 
 export const Register = () => {
   const [formData, setFormData] = useState({
@@ -20,27 +20,15 @@ export const Register = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/register",
-        formData
-      );
-      console.log(response.data); // Handle the response from the server
+      const response = await registerUser(formData);
+      console.log(response); // Handle the response from the server
 
       // Reset the form and clear any error messages
       setFormData({ username: "", email: "", password: "" });
       setErrorMessage("");
     } catch (error) {
       console.error(error);
-      // Handle the error
-      if (
-        error.response &&
-        error.response.data &&
-        error.response.data.message
-      ) {
-        setErrorMessage(error.response.data.message);
-      } else {
-        setErrorMessage("An error occurred during registration");
-      }
+      setErrorMessage(error.message);
     }
   };
 
