@@ -14,8 +14,8 @@ const Login = () => {
   };
 
   return (
-    <div className="section py-10 items-center">
-      <div className="flex flex-wrap py-5 flex-col md:flex-row w-full h-auto gap-10 bg-white rounded-2xl shadow-xl">
+    <div className="section py-10 items-center flex-wrap">
+      <div className="flex py-5 flex-col md:flex-row w-full h-auto gap-5 bg-white rounded-2xl shadow-xl">
         <div className="flex justify-center">
           <Dog className="md:w-full w-4/5 h-auto" />
         </div>
