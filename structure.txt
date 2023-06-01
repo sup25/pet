@@ -18,13 +18,14 @@ Pet/
     │   │   ├── LoginForm.js
     │   │   ├── LogoutButton.js
     │   │   ├── RegisterForm.js
-    │   │   └── WelcomeMessage.js
+    │   │   
     │   ├── pages/
     │   │   ├── LoginPage.js
     │   │   ├── LogoutPage.js
     │   │   └── RegisterPage.js
     │   ├── App.js
     │   ├── index.js
-    │   └── utils.js
+    │   └── Pet.js
+    |   └── animation
     ├── package.json
     └── README.md
