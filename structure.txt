@@ -18,11 +18,12 @@ Pet/
     │   │   ├── LoginForm.js
     │   │   ├── LogoutButton.js
     │   │   ├── RegisterForm.js
-    │   │   
+    │   │   ├── Footer
+    |   |   ├── Navbar 
     │   ├── pages/
-    │   │   ├── LoginPage.js
-    │   │   ├── LogoutPage.js
-    │   │   └── RegisterPage.js
+    │   │   ├── Home
+    │   │   ├── About
+    │   │   └── Others
     │   ├── App.js
     │   ├── index.js
     │   └── Pet.js
