@@ -21,46 +21,44 @@ const Login = () => {
         </div>
         <form
           onSubmit={handleFormSubmit}
-          className="md:w-2/5 w-full height-fit px-3 flex items-center"
+          className="md:max-w-[632px] w-full justify-center height-fit px-3 flex  gap-5 flex-col items-start"
         >
-          <div className="flex flex-col gap-5 w-full h-auto">
-            <div className="text-2xl md:text-4xl">
-              Welcome back to Pawsitively Perfect
-            </div>
-            <span className="text-base text-gray-400">
-              where every pet deserves a loving home
-            </span>
-            <input
-              type="email"
-              name="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              placeholder="Email"
-              className="w-full h-auto py-2 rounded-2xl flex px-4 border border-[#0d5b46]"
-            />
-            <input
-              type="password"
-              name="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              placeholder="Password"
-              className="w-full h-auto py-2 rounded-2xl flex px-4 border border-[#0d5b46]"
-            />
-            {error && <p className="text-red-500">{error}</p>}
-            <button
-              type="submit"
-              className="w-1/2 h-auto justify-center text-white font-bold text-xl py-1 rounded-3xl flex px-4 bg-[#0d5b46] hover:bg-[#199e7a]"
-            >
-              Submit
-            </button>
-            <div className="text-xl mb-2">
-              Don't have an account?{" "}
-              <Link to="/register" className="text-[#0d5b46]">
-                Sign Up
-              </Link>
-            </div>
+          <div className="text-2xl md:text-4xl">
+            Welcome back to Pawsitively Perfect
+          </div>
+          <span className="text-base text-gray-400">
+            where every pet deserves a loving home
+          </span>
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            placeholder="Email"
+            className="w-full h-auto py-2 rounded-2xl flex px-4 border border-[#0d5b46]"
+          />
+          <input
+            type="password"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            placeholder="Password"
+            className="w-full h-auto py-2 rounded-2xl flex px-4 border border-[#0d5b46]"
+          />
+          {error && <p className="text-red-500">{error}</p>}
+          <button
+            type="submit"
+            className="w-1/2 h-auto justify-center text-white font-bold text-xl py-1 rounded-3xl flex px-4 bg-[#0d5b46] hover:bg-[#199e7a]"
+          >
+            Submit
+          </button>
+          <div className="text-xl mb-2">
+            Don't have an account?{" "}
+            <Link to="/register" className="text-[#0d5b46]">
+              Sign Up
+            </Link>
           </div>
         </form>
       </div>

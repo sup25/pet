@@ -1,13 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useFetchUser } from "../Api/Api";
 import { AiFillCamera } from "react-icons/ai";
 import axios from "axios";
+import { ProfileContext } from "../Context/ProfileContext";
 
 const Account = () => {
+  const { profilePicture, setProfilePicture } = useContext(ProfileContext);
   const user = useFetchUser();
-  const [profilePicture, setProfilePicture] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [profileChanged, setProfileChanged] = useState(false);
+
+  useEffect(() => {
+    // Retrieve profile picture from local storage on component mount
+    const storedProfilePicture = localStorage.getItem("profilePicture");
+    if (storedProfilePicture) {
+      setProfilePicture(storedProfilePicture);
+    }
+  }, []);
 
   const handleProfilePictureUpload = async () => {
     if (selectedFile) {
@@ -28,10 +37,11 @@ const Account = () => {
           config
         );
 
-        console.log(response.data); // Check the response data structure
+        console.log(response.data);
 
         // Update the profile picture in the state
         setProfilePicture(URL.createObjectURL(selectedFile));
+
         // Save the profile picture to local storage
         localStorage.setItem(
           "profilePicture",
@@ -39,7 +49,8 @@ const Account = () => {
         );
 
         setSelectedFile(null);
-        setProfileChanged(true); // Set profileChanged to true after successful upload
+        // Set profileChanged to true after successful upload
+        setProfileChanged(true);
 
         setTimeout(() => {
           setProfileChanged(false);
@@ -56,13 +67,12 @@ const Account = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Add your form submission logic here
   };
 
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
     setSelectedFile(file);
-    setProfileChanged(false); // Reset profileChanged when selecting a new file
+    setProfileChanged(false);
     if (file) {
       const objectURL = URL.createObjectURL(new Blob([file]));
       setProfilePicture(objectURL);

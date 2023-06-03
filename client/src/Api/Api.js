@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
+//for login
 export const handleSubmit = async (email, password, setError) => {
   try {
     const response = await axios.post("http://localhost:5000/login", {
@@ -20,7 +21,7 @@ export const handleSubmit = async (email, password, setError) => {
     setError("Login failed");
   }
 };
-
+//for register
 export const registerUser = async (formData) => {
   try {
     const response = await axios.post(
@@ -38,6 +39,7 @@ export const registerUser = async (formData) => {
   }
 };
 
+//for app.js
 export const useFetchUser = () => {
   const [user, setUser] = useState(null);
 

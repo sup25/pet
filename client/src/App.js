@@ -6,6 +6,7 @@ import Navbar from "./component/Navbar/Navbar";
 import { Footer } from "./component/Footer/Footer";
 import Pet from "./Pet";
 import Account from "./component/Account";
+import { ProfileProvider } from "./Context/ProfileContext";
 
 const App = () => {
   const user = useFetchUser();
@@ -22,28 +23,30 @@ const App = () => {
 
   return (
     <div>
-      <Routes>
-        <Route
-          element={
-            <>
-              <Navbar />
-              <Outlet />
-              <Footer />
-            </>
-          }
-        >
-          <Route path="/" element={<Pet />} />
-        </Route>
+      <ProfileProvider>
+        <Routes>
+          <Route
+            element={
+              <>
+                <Navbar />
+                <Outlet />
+                <Footer />
+              </>
+            }
+          >
+            <Route path="/" element={<Pet />} />
+          </Route>
 
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        {user ? (
-          <Route path="/account" element={<Account />} />
-        ) : (
-          <Route path="/account" element={<Navigate to="/404" replace />} />
-        )}
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          {user ? (
+            <Route path="/account" element={<Account />} />
+          ) : (
+            <Route path="/account" element={<Navigate to="/404" replace />} />
+          )}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </ProfileProvider>
     </div>
   );
 };
