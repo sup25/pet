@@ -26,7 +26,9 @@ Pet/
     │   │   └── Others
     │   ├── App.js
     │   ├── index.js
-    │   └── Pet.js
+    │   ├── Pet.js
+    |   ├──Context/
+    |   |   ├── authContext
     |   └── animation
     ├── package.json
     └── README.md
