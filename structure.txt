@@ -29,6 +29,7 @@ Pet/
     │   ├── Pet.js
     |   ├──Context/
     |   |   ├── authContext
+    |   |   ├── ProfileContext
     |   └── animation
     ├── package.json
     └── README.md
