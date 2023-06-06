@@ -37,16 +37,14 @@ const Account = () => {
           config
         );
 
-        console.log(response.data);
+        const imageURL = response.data.url; // Extract the URL from the response
 
+        // Save the profile picture URL to MongoDB instead of saving the entire selectedFile
         // Update the profile picture in the state
-        setProfilePicture(URL.createObjectURL(selectedFile));
+        setProfilePicture(imageURL);
 
-        // Save the profile picture to local storage
-        localStorage.setItem(
-          "profilePicture",
-          URL.createObjectURL(selectedFile)
-        );
+        // Save the profile picture URL to local storage
+        localStorage.setItem("profilePicture", imageURL);
 
         setSelectedFile(null);
         // Set profileChanged to true after successful upload
