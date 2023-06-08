@@ -1,0 +1,11 @@
+Add a form or modal to capture pet details, such as name, age, breed, and any other relevant information.
+Implement a submit function that sends the form data to a server or updates the local state to add the new pet.
+Display a list of created pets, including the newly added pet.
+
+Notifications:
+Implement a notification system to inform users about successful CRUD operations, such as displaying a success message or using a toast notification library.
+
+Favorites or Wishlist:
+Implement a feature that allows users to mark pets as favorites or add them to a wishlist.
+Provide a separate view or section where users can easily access their favorite or wishlist pets.
+
