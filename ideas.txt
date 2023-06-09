@@ -9,3 +9,4 @@ Favorites or Wishlist:
 Implement a feature that allows users to mark pets as favorites or add them to a wishlist.
 Provide a separate view or section where users can easily access their favorite or wishlist pets.
 
+animation and list and dropdowns
