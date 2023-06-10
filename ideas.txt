@@ -10,3 +10,48 @@ Implement a feature that allows users to mark pets as favorites or add them to a
 Provide a separate view or section where users can easily access their favorite or wishlist pets.
 
 animation and list and dropdowns
+
+**Welcome to Our Pet Gallery!**
+
+At Our Pet Gallery, we believe that every pet deserves to be celebrated and cherished. We have created a platform where you can share your beloved furry friends with the world. Upload your pet's image along with some information, and let their cuteness shine!
+
+**Share Your Pet's Photo:**
+
+Upload an adorable photo of your pet and tell us a bit about them. We can't wait to see your furry companion!
+
+[Upload Image]
+
+**Pet Information:**
+
+Please provide us with some details about your pet. This will help us create a profile for them and share their unique qualities with our community.
+
+- Pet Name:
+- Pet Type (e.g., dog, cat, bird):
+- Breed (if applicable):
+- Age:
+- Gender:
+- Location:
+- Fun Fact:
+
+**Upload Guidelines:**
+
+To ensure the best experience for all our users, please adhere to the following guidelines when uploading your pet's photo:
+
+1. The image should be in JPEG or PNG format.
+2. Maximum file size: 5MB.
+3. The photo should be clear and well-lit, showcasing your pet's adorable features.
+4. Ensure that the image does not violate any copyright or intellectual property rights.
+
+**Terms and Conditions:**
+
+By uploading an image and providing pet information, you agree to the following terms and conditions:
+
+1. You confirm that you are the owner of the photo and have the necessary rights to share it.
+2. You grant Our Pet Gallery the non-exclusive right to display, reproduce, and distribute the uploaded image for promotional and community-related purposes.
+3. You understand that the uploaded content may be moderated and edited for clarity, appropriateness, or compliance with our guidelines.
+
+**Note:**
+
+Please be aware that all submitted content will go through a moderation process before being displayed on our website. We strive to maintain a positive and safe environment for all users, so any content that violates our guidelines will not be published.
+
+Thank you for being a part of Our Pet Gallery! We can't wait to meet your adorable pets and share their stories with the world.
