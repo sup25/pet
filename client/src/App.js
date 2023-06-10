@@ -1,5 +1,5 @@
+import React from "react";
 import { Routes, Route, Navigate, Link, Outlet } from "react-router-dom";
-import { useFetchUser } from "./Api/Api";
 import Login from "./component/Login";
 import { Register } from "./component/Register";
 import Navbar from "./component/Navbar/Navbar";
@@ -7,19 +7,24 @@ import { Footer } from "./component/Footer/Footer";
 import Pet from "./Pet";
 import Account from "./component/Account";
 import { ProfileProvider } from "./Context/ProfileContext";
+import { useFetchUserData } from "./Api/Api";
+
+const NotFound = () => {
+  return (
+    <div>
+      <h1>404 Not Found</h1>
+      <p>The page you are looking for does not exist.</p>
+      <Link to="/">Go back to homepage</Link>
+    </div>
+  );
+};
 
 const App = () => {
-  const user = useFetchUser();
+  const { user, isLoading } = useFetchUserData();
 
-  const NotFound = () => {
-    return (
-      <div>
-        <h1>404 Not Found</h1>
-        <p>The page you are looking for does not exist.</p>
-        <Link to="/">Go back to homepage</Link>
-      </div>
-    );
-  };
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
