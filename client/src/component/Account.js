@@ -37,16 +37,14 @@ const Account = () => {
           config
         );
 
-        const imageURL = response.data.url; // Extract the URL from the response
+        const imageURL = response.data.profilePicture; // Extract the profile picture URL from the response
 
-        // Save the profile picture URL to MongoDB instead of saving the entire selectedFile
         // Update the profile picture in the state
         setProfilePicture(imageURL);
 
         // Save the profile picture URL to local storage
         localStorage.setItem("profilePicture", imageURL);
 
-        setSelectedFile(null);
         // Set profileChanged to true after successful upload
         setProfileChanged(true);
 
@@ -89,7 +87,9 @@ const Account = () => {
                 className="w-full h-full object-cover"
               />
             ) : (
-              <div className="text-3xl">{user}</div>
+              <div className="text-3xl">
+                {user ? user : "No profile Picuture"}
+              </div>
             )}
           </div>
 

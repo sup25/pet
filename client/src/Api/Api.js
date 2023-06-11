@@ -42,7 +42,6 @@ export const registerUser = async (formData) => {
 //for account.js
 export const useFetchUser = () => {
   const [user, setUser] = useState(null);
-
   useEffect(() => {
     const fetchUser = async () => {
       try {

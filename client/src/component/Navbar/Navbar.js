@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../Assets/logo";
 import { GiHamburgerMenu, GiCancel } from "react-icons/gi";
@@ -6,6 +6,7 @@ import { HiHome } from "react-icons/hi";
 import { FiLogIn, FiLogOut } from "react-icons/fi";
 import { IoMdPersonAdd } from "react-icons/io";
 import { useFetchUser } from "../../Api/Api";
+import { ProfileContext } from "../../Context/ProfileContext";
 
 const contents = [
   {
@@ -20,6 +21,7 @@ const contents = [
 
 const Navbar = () => {
   const user = useFetchUser();
+  const { profilePicture } = useContext(ProfileContext);
   // ham and cross
   const [show, setShow] = useState(false);
   const toggleMenu = () => {
@@ -54,9 +56,19 @@ const Navbar = () => {
                 <>
                   <div className="" onClick={toggleDropdown}>
                     <div className="flex flex-col items-center justify-between ">
-                      <span className="text-white font-bold cursor-pointer justify-center border flex bg-slate-200/40  items-center text-xs rounded-full h-12 w-12 py-2 px-2 border-gray-400 ">
-                        {user}
-                      </span>{" "}
+                      <div className="flex items-center justify-between">
+                        {profilePicture ? (
+                          <img
+                            src={profilePicture}
+                            alt="ProfilePicture"
+                            className="w-12 h-12 rounded-full object-cover"
+                          />
+                        ) : (
+                          <span className="text-white font-bold cursor-pointer justify-center border flex bg-slate-200/40  items-center text-xs rounded-full h-12 w-12 py-2 px-2 border-gray-400 ">
+                            {user}
+                          </span>
+                        )}
+                      </div>
                       {expanded && (
                         <>
                           <div className="py-4 px-2 bg-[#0d5b46] rounded-3xl text-base flex-col items-center justify-center absolute top-16 z-50">
