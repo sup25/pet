@@ -8,6 +8,7 @@ import Pet from "./Pet";
 import Account from "./component/Account";
 import { ProfileProvider } from "./Context/ProfileContext";
 import { useFetchUserData } from "./Api/Api";
+import Dashboard from "./Dashboard";
 
 const NotFound = () => {
   return (
@@ -50,6 +51,7 @@ const App = () => {
             <Route path="/account" element={<Navigate to="/404" replace />} />
           )}
           <Route path="*" element={<NotFound />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </ProfileProvider>
     </div>
