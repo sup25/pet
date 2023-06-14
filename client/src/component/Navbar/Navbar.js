@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../Assets/logo";
 import { GiHamburgerMenu, GiCancel } from "react-icons/gi";
@@ -21,26 +21,31 @@ const contents = [
 
 const Navbar = () => {
   const user = useFetchUser();
-  const { profilePicture } = useContext(ProfileContext);
-  // ham and cross
+  const { profilePicture, setProfilePicture } = useContext(ProfileContext);
+
   const [show, setShow] = useState(false);
   const toggleMenu = () => {
     setShow(!show);
   };
 
-  // Dropdown
   const [expanded, setExpanded] = useState(false);
-
   const toggleDropdown = () => {
     setExpanded(!expanded);
   };
 
-  // Fetching the user data in navbar
-
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("profilePicture");
+    setProfilePicture("");
     window.location.reload();
   };
+
+  useEffect(() => {
+    const storedProfilePicture = localStorage.getItem("profilePicture");
+    if (storedProfilePicture) {
+      setProfilePicture(storedProfilePicture);
+    }
+  }, []);
 
   return (
     <>
@@ -80,7 +85,6 @@ const Navbar = () => {
                                 Account
                               </Link>
                             </div>
-
                             <button onClick={handleLogout}>
                               <div className="flex hover:text-orange-300 mt-3 items-center border-b-2 border-gray-300 rounded">
                                 <FiLogOut />
@@ -101,7 +105,6 @@ const Navbar = () => {
               )}
             </div>
           </div>
-
           <div>
             <div className="md:hidden text-white flex items-center transition-all ease-in-out delay-150">
               {show ? (
@@ -112,7 +115,6 @@ const Navbar = () => {
                 <GiHamburgerMenu onClick={toggleMenu} className="w-8 h-auto" />
               )}
             </div>
-
             <div className="realative">
               {show && (
                 <div className="gap-5 md:hidden absolute py-5 px-2 top-20 right-0 flex flex-col p-0 m-0 w-[calc(100vh-500px)] h-[calc(100vh-130px)] whitespace-nowrap bg-white rounded-l-lg shadow-lg z-50">
