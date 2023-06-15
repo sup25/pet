@@ -1,23 +1,133 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "./component/Navbar/Navbar";
-import { BsFillBookmarkHeartFill } from "react-icons/bs";
+import { BsFillBookmarkHeartFill, BsFillPatchPlusFill } from "react-icons/bs";
 
 const Dashboard = () => {
+  const [posts, setPosts] = useState([]);
+  const [formData, setFormData] = useState({
+    petName: "",
+    petType: "",
+    petDescription: "",
+  });
+  const [clickFill, setClickFill] = useState(false);
+
+  const toggleForm = () => {
+    setClickFill(!clickFill);
+  };
+
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    setPosts([...posts, formData]);
+    setFormData({
+      petName: "",
+      petType: "",
+      petDescription: "",
+    });
+  };
+
   return (
     <div className="bg-white h-screen">
       <Navbar />
       <h1 className="text-3xl text-center py-8">Welcome user</h1>
-      <div className="container">
-        <div className="section justify-end">
+      <div className="container mx-auto pb-20 px-4">
+        <div className="flex justify-end gap-2">
+          <div
+            className="bg-gray-200 p-4 rounded flex shadow justify-center items-center cursor-pointer"
+            onClick={toggleForm}
+          >
+            <BsFillPatchPlusFill className="w-8 h-auto" />
+          </div>
           <div className="bg-gray-200 p-4 rounded flex shadow justify-center items-center">
             <BsFillBookmarkHeartFill className="w-8 h-auto" />
           </div>
         </div>
         <div className="mt-8">
           <h2 className="text-2xl font-semibold mb-4">Recent Activity</h2>
+          <ul className="list-disc pl-8">
+            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+            <li>Proin auctor purus ut semper pharetra.</li>
+            <li>Sed posuere justo sed elit pulvinar, sed tempor mi lacinia.</li>
+            <li>
+              Nullam finibus mauris vitae lectus viverra, vitae ultrices nisl
+              accumsan.
+            </li>
+          </ul>
+        </div>
+        <div className="mt-8">
+          <ul className="space-y-4">
+            {posts.map((post, index) => (
+              <li key={index} className="bg-gray-100 p-4 rounded shadow">
+                <h3 className="text-lg font-semibold">{post.petName}</h3>
+                <p className="mb-2">Type: {post.petType}</p>
+                <p>Description: {post.petDescription}</p>
+              </li>
+            ))}
+          </ul>
+          {clickFill && (
+            <div className="mt-8">
+              <h2 className="text-2xl font-semibold mb-4">Create a Post</h2>
+              <form onSubmit={handleFormSubmit} className="space-y-4">
+                <div>
+                  <label htmlFor="petName" className="block mb-2 font-semibold">
+                    Pet Name:
+                  </label>
+                  <input
+                    type="text"
+                    id="petName"
+                    name="petName"
+                    value={formData.petName}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-2 border rounded"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="petType" className="block mb-2 font-semibold">
+                    Pet Type:
+                  </label>
+                  <input
+                    type="text"
+                    id="petType"
+                    name="petType"
+                    value={formData.petType}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-2 border rounded"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="petDescription"
+                    className="block mb-2 font-semibold"
+                  >
+                    Pet Description:
+                  </label>
+                  <textarea
+                    id="petDescription"
+                    name="petDescription"
+                    value={formData.petDescription}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-2 border rounded"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="bg-[#0d5b46] hover:bg-[#107359] text-white py-2 px-4 rounded"
+                >
+                  Submit
+                </button>
+              </form>
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
 };
+
 export default Dashboard;
