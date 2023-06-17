@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "./component/Navbar/Navbar";
 import { BsFillBookmarkHeartFill, BsFillPatchPlusFill } from "react-icons/bs";
-
+import { FcGallery } from "react-icons/fc";
 const Dashboard = () => {
   const [posts, setPosts] = useState([]);
 
@@ -47,6 +47,9 @@ const Dashboard = () => {
           </div>
           <div className=" bg-[#0d5b46] hover:bg-[#107359] p-4 rounded flex shadow justify-center items-center">
             <BsFillBookmarkHeartFill className="w-8 h-auto text-white " />
+          </div>
+          <div className=" bg-[#0d5b46] hover:bg-[#107359] p-4 rounded flex shadow justify-center items-center">
+            <FcGallery className="w-8 h-auto text-white " />
           </div>
         </div>
         <div
