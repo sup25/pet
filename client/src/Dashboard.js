@@ -1,8 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "./component/Navbar/Navbar";
-import { BsFillBookmarkHeartFill, BsFillPatchPlusFill } from "react-icons/bs";
-import { FcGallery } from "react-icons/fc";
+import Tooltip from "./Tooltip";
+import { useFetchUser } from "./Api/Api";
+import {
+  BsFillBookmarkHeartFill,
+  BsFillPatchPlusFill,
+  BsImageFill,
+} from "react-icons/bs";
 const Dashboard = () => {
+  const [isuser, setIsUser] = useState(false);
+  const user = useFetchUser();
   const [posts, setPosts] = useState([]);
 
   const [formData, setFormData] = useState({
@@ -32,25 +39,47 @@ const Dashboard = () => {
       petDescription: "",
     });
   };
+  useEffect(() => {
+    if (isuser) {
+      const timer = setTimeout(() => {
+        setIsUser(false);
+      }, 5000);
+
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [isuser]);
 
   return (
     <div className="bg-white h-screen">
       <Navbar />
-      <h1 className="text-3xl text-center py-8">Welcome user</h1>
+      {isuser && (
+        <h1 className="text-3xl text-[#0d5b46] text-center py-8">
+          Welcome {user}
+        </h1>
+      )}
+
       <div className="container mx-auto pb-20 px-4">
         <div className="flex justify-end gap-2">
-          <div
-            className="bg-gray-20 bg-[#0d5b46] hover:bg-[#107359]  p-4 rounded flex shadow justify-center items-center cursor-pointer"
-            onClick={toggleForm}
-          >
-            <BsFillPatchPlusFill className="w-8 h-auto text-white " />
-          </div>
-          <div className=" bg-[#0d5b46] hover:bg-[#107359] p-4 rounded flex shadow justify-center items-center">
-            <BsFillBookmarkHeartFill className="w-8 h-auto text-white " />
-          </div>
-          <div className=" bg-[#0d5b46] hover:bg-[#107359] p-4 rounded flex shadow justify-center items-center">
-            <FcGallery className="w-8 h-auto text-white " />
-          </div>
+          <Tooltip text="Create Post">
+            <div
+              className="bg-gray-20 bg-[#0d5b46] hover:bg-[#107359]  p-4 rounded flex shadow justify-center items-center cursor-pointer"
+              onClick={toggleForm}
+            >
+              <BsFillPatchPlusFill className="w-8 h-auto text-white " />
+            </div>
+          </Tooltip>
+          <Tooltip text="Favourite">
+            <div className=" bg-[#0d5b46] hover:bg-[#107359] p-4 rounded flex shadow justify-center items-center">
+              <BsFillBookmarkHeartFill className="w-8 h-auto text-white " />
+            </div>
+          </Tooltip>
+          <Tooltip text="Gallary">
+            <div className=" bg-[#0d5b46] hover:bg-[#107359] p-4 rounded flex shadow justify-center items-center">
+              <BsImageFill className="w-8 h-auto text-white  " />
+            </div>
+          </Tooltip>
         </div>
         <div
           className={`p-4 mt-4 tooltip="Add new post" gap-4 rounded flex justify-center items-center ${
