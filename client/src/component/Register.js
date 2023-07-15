@@ -34,10 +34,9 @@ export const Register = () => {
 
   return (
     <div className="section py-10 items-center">
-      <div className="flex flex-wrap py-5 flex-col md:flex-row w-full h-auto gap-5 bg-white rounded-2xl shadow-xl">
-        <div className="flex justify-center">
-          <DogLog className="md:w-full w-4/5 h-auto" />
-        </div>
+      <div className="flex flex-wrap p-5 flex-col md:flex-row w-full h-auto gap-5 bg-white rounded-2xl shadow-xl">
+        <DogLog className="md:w-[50%] w-4/5 h-auto" />
+
         <form
           className="md:w-2/5 w-full height-fit px-3 flex items-center"
           onSubmit={handleSubmit}

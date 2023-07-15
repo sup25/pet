@@ -60,7 +60,7 @@ const Dashboard = () => {
         </h1>
       )}
 
-      <div className="container mx-auto pb-20 px-4">
+      <div className="container mx-auto mt-5 pb-20 px-4">
         <div className="flex justify-end gap-2">
           <Tooltip text="Create Post">
             <div
@@ -101,37 +101,39 @@ const Dashboard = () => {
               <div className="mt-8 w-full flex flex-col flex-wrap ">
                 <h2 className="text-2xl font-semibold mb-4">Create a Post</h2>
                 <form onSubmit={handleFormSubmit} className="space-y-4">
-                  <div>
-                    <label
-                      htmlFor="petName"
-                      className="block mb-2 font-semibold"
-                    >
-                      Pet Name:
-                    </label>
-                    <input
-                      type="text"
-                      id="petName"
-                      name="petName"
-                      value={formData.petName}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-2 border rounded"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="petType"
-                      className="block mb-2 font-semibold"
-                    >
-                      Pet Type:
-                    </label>
-                    <input
-                      type="text"
-                      id="petType"
-                      name="petType"
-                      value={formData.petType}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-2 border rounded"
-                    />
+                  <div className="flex justify-between flex-wrap">
+                    <div className="w-[40%]">
+                      <label
+                        htmlFor="petName"
+                        className="block mb-2 font-semibold"
+                      >
+                        Pet Name:
+                      </label>
+                      <input
+                        type="text"
+                        id="petName"
+                        name="petName"
+                        value={formData.petName}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-2 border rounded"
+                      />
+                    </div>
+                    <div className="w-[40%]">
+                      <label
+                        htmlFor="petType"
+                        className="block mb-2 font-semibold"
+                      >
+                        Pet Type:
+                      </label>
+                      <input
+                        type="text"
+                        id="petType"
+                        name="petType"
+                        value={formData.petType}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-2 border rounded"
+                      />
+                    </div>
                   </div>
                   <div>
                     <label

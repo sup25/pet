@@ -41,10 +41,10 @@ const App = () => {
             }
           >
             <Route path="/" element={<Pet />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
           </Route>
 
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
           {user ? (
             <Route path="/account" element={<Account />} />
           ) : (
