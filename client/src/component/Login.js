@@ -36,7 +36,7 @@ const Login = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
             placeholder="Email"
-            className="w-full h-auto py-2 rounded-2xl flex px-4 border border-[#0d5b46]"
+            className="w-4/5 h-auto py-2 rounded-2xl flex px-4 border border-[#0d5b46]"
           />
           <input
             type="password"
@@ -45,12 +45,12 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
             placeholder="Password"
-            className="w-full h-auto py-2 rounded-2xl flex px-4 border border-[#0d5b46]"
+            className="w-4/5 h-auto py-2 rounded-2xl flex px-4 border border-[#0d5b46]"
           />
           {error && <p className="text-red-500">{error}</p>}
           <button
             type="submit"
-            className="w-1/2 h-auto justify-center text-white font-bold text-xl py-1 rounded-3xl flex px-4 bg-[#0d5b46] hover:bg-[#199e7a]"
+            className="w-2/5 h-auto justify-center text-white font-bold text-xl py-1 rounded-3xl flex px-4 bg-[#0d5b46] hover:bg-[#199e7a]"
           >
             Submit
           </button>
