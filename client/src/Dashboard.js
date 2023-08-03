@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "./component/Navbar/Navbar";
-import Tooltip from "./Tooltip";
+import Tooltip from "./utils/Tooltip";
 import { useFetchUser } from "./Api/Api";
 import {
   BsFillBookmarkHeartFill,
@@ -64,7 +64,7 @@ const Dashboard = () => {
         <div className="flex justify-end gap-2">
           <Tooltip text="Create Post">
             <div
-              className="bg-gray-20 bg-[#0d5b46] hover:bg-[#107359]  p-4 rounded flex shadow justify-center items-center cursor-pointer"
+              className="  bg-gray-20 bg-[#0d5b46] hover:bg-[#107359]  p-4 rounded flex shadow justify-center items-center cursor-pointer"
               onClick={toggleForm}
             >
               <BsFillPatchPlusFill className="w-8 h-auto text-white " />
@@ -83,11 +83,13 @@ const Dashboard = () => {
         </div>
         <div
           className={`p-4 mt-4 tooltip="Add new post" gap-4 rounded flex justify-center items-center ${
-            clickFill ? "shadow" : ""
+            clickFill
+              ? "shadow  transition duration-250 ease-linear "
+              : "opacity-0 pointer-events-none"
           }`}
         >
           {clickFill && (
-            <div className="md:flex-nowrap flex-wrap flex justify-between w-full">
+            <div className=" md:flex-nowrap flex-wrap flex justify-between w-full">
               <div className="flex flex-col w-full justify-center items-center gap-2">
                 <h2 className="text-2xl font-semibold">Upload Photo</h2>
                 <div className="w-[300px] h-[250px] rounded bg-gray-200"></div>
