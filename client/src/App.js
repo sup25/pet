@@ -7,6 +7,7 @@ import { Footer } from "./component/Footer/Footer";
 import Pet from "./Pet";
 import Account from "./component/Account";
 import { ProfileProvider } from "./Context/ProfileContext";
+import { AuthProvider } from "./Context/authContext";
 import { useFetchUserData } from "./Api/Api";
 import Dashboard from "./Dashboard";
 
@@ -28,33 +29,35 @@ const App = () => {
   }
 
   return (
-    <div>
-      <ProfileProvider>
-        <Routes>
-          <Route
-            element={
-              <>
-                <Navbar />
-                <Outlet />
-                <Footer />
-              </>
-            }
-          >
-            <Route path="/" element={<Pet />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-          </Route>
+    <>
+      <AuthProvider>
+        <ProfileProvider>
+          <Routes>
+            <Route
+              element={
+                <>
+                  <Navbar />
+                  <Outlet />
+                  <Footer />
+                </>
+              }
+            >
+              <Route path="/" element={<Pet />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+            </Route>
 
-          {user ? (
-            <Route path="/account" element={<Account />} />
-          ) : (
-            <Route path="/account" element={<Navigate to="/404" replace />} />
-          )}
-          <Route path="*" element={<NotFound />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Routes>
-      </ProfileProvider>
-    </div>
+            {user ? (
+              <Route path="/account" element={<Account />} />
+            ) : (
+              <Route path="/account" element={<Navigate to="/404" replace />} />
+            )}
+            <Route path="*" element={<NotFound />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Routes>
+        </ProfileProvider>
+      </AuthProvider>
+    </>
   );
 };
 

@@ -1,24 +1,31 @@
-import { createContext, useState } from "react";
+import React, { createContext, useState, useContext } from "react";
+import { ProfileContext } from "./ProfileContext";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const { profilePicture, setProfilePicture } = useContext(ProfileContext);
 
   const login = (userData) => {
-    // Set the user data in the context state
     setUser(userData);
   };
 
   const logout = () => {
-    // Clear the user data from the context state
     setUser(null);
-    // Remove the token from localStorage
     localStorage.removeItem("token");
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        login,
+        logout,
+        profilePicture,
+        setProfilePicture,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

@@ -16,6 +16,7 @@ const Account = () => {
     if (storedProfilePicture) {
       setProfilePicture(storedProfilePicture);
     }
+    // Also, update the selectedFile state if profile picture is available
   }, []);
 
   const handleProfilePictureUpload = async () => {
@@ -69,10 +70,6 @@ const Account = () => {
     const file = e.target.files[0];
     setSelectedFile(file);
     setProfileChanged(false);
-    if (file) {
-      const objectURL = URL.createObjectURL(new Blob([file]));
-      setProfilePicture(objectURL);
-    }
   };
 
   return (
@@ -82,7 +79,7 @@ const Account = () => {
           <div className="w-[300px] h-[250px] flex flex-col items-center justify-center bg-gray-300 rounded-t-xl shadow-xl">
             {profilePicture ? (
               <img
-                src={profilePicture}
+                src={selectedFile ? URL.createObjectURL(selectedFile) : ""}
                 alt="ProfilePicture"
                 className="w-full h-full object-cover"
               />
