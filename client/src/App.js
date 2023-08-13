@@ -10,12 +10,12 @@ import { ProfileProvider } from "./Context/ProfileContext";
 import { AuthProvider } from "./Context/authContext";
 import { useFetchUserData } from "./Api/Api";
 import Dashboard from "./Dashboard";
+import { PageNotFound } from "./pages/PageNotFound/PageNotFound";
 
 const NotFound = () => {
   return (
-    <div>
-      <h1>404 Not Found</h1>
-      <p>The page you are looking for does not exist.</p>
+    <div className="flex flex-col w-full items-center">
+      <PageNotFound />
       <Link to="/">Go back to homepage</Link>
     </div>
   );
