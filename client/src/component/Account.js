@@ -16,7 +16,6 @@ const Account = () => {
     if (storedProfilePicture) {
       setProfilePicture(storedProfilePicture);
     }
-    // Also, update the selectedFile state if profile picture is available
   }, []);
 
   const handleProfilePictureUpload = async () => {
@@ -37,8 +36,8 @@ const Account = () => {
           formData,
           config
         );
-
-        const imageURL = response.data.profilePicture; // Extract the profile picture URL from the response
+        // Extract the profile picture URL from the response
+        const imageURL = response.data.profilePicture;
 
         // Update the profile picture in the state
         setProfilePicture(imageURL);

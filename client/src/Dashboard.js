@@ -11,6 +11,23 @@ const Dashboard = () => {
   const [isuser, setIsUser] = useState(false);
   const user = useFetchUser();
   const [posts, setPosts] = useState([]);
+  const [dogImages, setDogImages] = useState([]);
+  const [showGallery, setShowGallery] = useState(false);
+  useEffect(() => {
+    const fetchDogImages = async () => {
+      try {
+        const response = await fetch(
+          "https://dog.ceo/api/breeds/image/random/20"
+        );
+        const data = await response.json();
+        setDogImages(data.message);
+      } catch (error) {
+        console.error("Error fetching dog images:", error);
+      }
+    };
+
+    fetchDogImages();
+  }, []);
 
   const [formData, setFormData] = useState({
     petName: "",
@@ -76,7 +93,10 @@ const Dashboard = () => {
             </div>
           </Tooltip>
           <Tooltip text="Gallary">
-            <div className=" bg-[#0d5b46] hover:bg-[#107359] p-4 rounded flex shadow justify-center items-center">
+            <div
+              className=" bg-[#0d5b46] hover:bg-[#107359] p-4 rounded flex shadow justify-center items-center"
+              onClick={() => setShowGallery(!showGallery)}
+            >
               <BsImageFill className="w-8 h-auto text-white  " />
             </div>
           </Tooltip>
@@ -185,6 +205,21 @@ const Dashboard = () => {
               </li>
             ))}
           </ul>
+        </div>
+        <div>
+          {showGallery && (
+            <div className="flex  justify-between flex-wrap gap-1  mt-4 w-full ">
+              {dogImages.map((imageUrl, index) => (
+                <div key={index} className="w-1/5 h-[300px] flex ">
+                  <img
+                    src={imageUrl}
+                    alt={`Dog ${index}`}
+                    className="w-full rounded"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
