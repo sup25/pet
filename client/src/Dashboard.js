@@ -183,18 +183,7 @@ const Dashboard = () => {
             </div>
           )}
         </div>
-        <div className="mt-8">
-          <h2 className="text-2xl font-semibold mb-4">Recent Activity</h2>
-          <ul className="list-disc pl-8">
-            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-            <li>Proin auctor purus ut semper pharetra.</li>
-            <li>Sed posuere justo sed elit pulvinar, sed tempor mi lacinia.</li>
-            <li>
-              Nullam finibus mauris vitae lectus viverra, vitae ultrices nisl
-              accumsan.
-            </li>
-          </ul>
-        </div>
+
         <div className="mt-8">
           <ul className="space-y-4">
             {posts.map((post, index) => (
