@@ -1,14 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useFetchUser } from "../Api/Api";
+import { GetUser } from "../hooks/GetUser";
 import { AiFillCamera } from "react-icons/ai";
 import axios from "axios";
 import { ProfileContext } from "../Context/ProfileContext";
 
 const Account = () => {
   const { profilePicture, setProfilePicture } = useContext(ProfileContext);
-  const user = useFetchUser();
+  const user = GetUser();
   const [selectedFile, setSelectedFile] = useState(null);
   const [profileChanged, setProfileChanged] = useState(false);
+
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
     // Retrieve profile picture from local storage on component mount
@@ -16,7 +19,12 @@ const Account = () => {
     if (storedProfilePicture) {
       setProfilePicture(storedProfilePicture);
     }
-  }, []);
+    if (user) {
+      setUsername(user?.username || "");
+      setEmail(user?.email || "");
+    }
+    console.log("user", user);
+  }, [user]);
 
   const handleProfilePictureUpload = async () => {
     if (selectedFile) {
@@ -70,6 +78,32 @@ const Account = () => {
     setSelectedFile(file);
     setProfileChanged(false);
   };
+  /*  const handleUpdateUserInfo = async () => {
+    try {
+      const updateData = {
+        userId: user._id,
+        username,
+        email,
+        password,
+      };
+      const token = localStorage.getItem("token");
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const response = await axios.post(
+        "http://localhost:5000/updateUserInfo",
+        updateData,
+        config
+      );
+
+      console.log("User updated:", response.data);
+      window.location.replace("/");
+    } catch (error) {
+      console.log("error updating the data", error);
+    }
+  }; */
 
   return (
     <div className="section py-20">
@@ -129,6 +163,8 @@ const Account = () => {
               required
               placeholder="Name"
               className="w-full h-auto py-2 rounded-2xl flex px-4 border border-[#0d5b46]"
+              value={username} // Use the state value for username
+              onChange={(e) => setUsername(e.target.value)}
             />
             <input
               type="email"
@@ -136,6 +172,8 @@ const Account = () => {
               required
               placeholder="Email"
               className="w-full h-auto py-2 rounded-2xl flex px-4 border border-[#0d5b46]"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <input
               type="password"
@@ -156,6 +194,7 @@ const Account = () => {
               type="submit"
               className="w-1/4 h-auto justify-center text-white font-bold text-xl py-1 rounded-3xl flex px-4 bg-[#0d5b46] hover:bg-[#199e7a]"
               disabled={!selectedFile}
+              /*  onClick={handleUpdateUserInfo} */
             >
               Save
             </button>

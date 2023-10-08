@@ -37,7 +37,6 @@ router.post(
         throw new Error("No file uploaded.");
       }
 
-      // Retrieve the file path or URL of the uploaded profile picture
       const filePath = req.file.path; // Multer stores the file in the specified destination folder
 
       // Retrieve the user ID from the authenticated request

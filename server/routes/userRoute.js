@@ -31,7 +31,7 @@ router.get("/user", async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    res.json({ user: user.username }); // Only send the username in the response
+    res.json({ user: user.username });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Server error" });

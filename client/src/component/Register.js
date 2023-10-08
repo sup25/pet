@@ -11,6 +11,7 @@ export const Register = () => {
   });
 
   const [errorMessage, setErrorMessage] = useState("");
+  const [successMsg, setSuccessMsg] = useState();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -26,6 +27,7 @@ export const Register = () => {
       // Reset the form and clear any error messages
       setFormData({ username: "", email: "", password: "" });
       setErrorMessage("");
+      setSuccessMsg("User created successfully");
     } catch (error) {
       console.error(error);
       setErrorMessage(error.message);
@@ -76,6 +78,7 @@ export const Register = () => {
               className="w-full h-auto py-2 rounded-2xl flex px-4 border border-[#0d5b46]"
             />
             {errorMessage && <div className="text-red-500">{errorMessage}</div>}
+            {successMsg && <div className="text-green-500">{errorMessage}</div>}
             <button
               type="submit"
               className="w-1/2 h-auto justify-center text-white font-bold text-xl py-1 rounded-3xl flex px-4 bg-[#0d5b46] hover:bg-[#199e7a]"

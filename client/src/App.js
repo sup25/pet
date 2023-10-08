@@ -9,7 +9,7 @@ import Account from "./component/Account";
 import { ProfileProvider } from "./Context/ProfileContext";
 import { AuthProvider } from "./Context/authContext";
 import { useFetchUserData } from "./Api/Api";
-import Dashboard from "./Dashboard";
+import Dashboard from "./pages/Dashboard/Dashboard";
 import { PageNotFound } from "./pages/PageNotFound/PageNotFound";
 
 const NotFound = () => {

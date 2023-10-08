@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "./component/Navbar/Navbar";
-import Tooltip from "./utils/Tooltip";
-import { useFetchUser } from "./Api/Api";
+import Navbar from "../../component/Navbar/Navbar";
+import Tooltip from "../../utils/Tooltip";
+import { useFetchUser } from "../../Api/Api";
 import {
   BsFillBookmarkHeartFill,
   BsFillPatchPlusFill,
