@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../../component/Navbar/Navbar";
 import Tooltip from "../../utils/Tooltip";
-import { useFetchUser } from "../../Api/Api";
+import { GetUser } from "../../hooks/GetUser";
 import {
   BsFillBookmarkHeartFill,
   BsFillPatchPlusFill,
@@ -9,7 +9,7 @@ import {
 } from "react-icons/bs";
 const Dashboard = () => {
   const [isuser, setIsUser] = useState(false);
-  const user = useFetchUser();
+  const user = GetUser();
   const [posts, setPosts] = useState([]);
   const [dogImages, setDogImages] = useState([]);
   const [showGallery, setShowGallery] = useState(false);

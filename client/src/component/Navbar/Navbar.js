@@ -5,7 +5,7 @@ import { GiHamburgerMenu, GiCancel } from "react-icons/gi";
 import { HiHome } from "react-icons/hi";
 import { FiLogIn, FiLogOut } from "react-icons/fi";
 import { IoMdPersonAdd } from "react-icons/io";
-import { useFetchUser } from "../../Api/Api";
+import { GetUser } from "../../hooks/GetUser";
 import { ProfileContext } from "../../Context/ProfileContext";
 
 const contents = [
@@ -20,7 +20,7 @@ const contents = [
 ];
 
 const Navbar = () => {
-  const user = useFetchUser();
+  const user = GetUser();
   const { profilePicture, setProfilePicture } = useContext(ProfileContext);
 
   const [show, setShow] = useState(false);

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../Models/User"); // Import your User model
+const User = require("../Models/User");
 
 // Define a route to handle updates
 router.post("/", async (req, res) => {

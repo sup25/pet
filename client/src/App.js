@@ -8,7 +8,7 @@ import Pet from "./Pet";
 import Account from "./component/Account";
 import { ProfileProvider } from "./Context/ProfileContext";
 import { AuthProvider } from "./Context/authContext";
-import { useFetchUserData } from "./Api/Api";
+import { GetUser } from "./hooks/GetUser";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import { PageNotFound } from "./pages/PageNotFound/PageNotFound";
 
@@ -22,7 +22,7 @@ const NotFound = () => {
 };
 
 const App = () => {
-  const { user, isLoading } = useFetchUserData();
+  const { user, isLoading } = GetUser();
 
   if (isLoading) {
     return <div>Loading...</div>;
