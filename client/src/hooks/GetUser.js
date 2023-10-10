@@ -4,6 +4,7 @@ import axios from "axios";
 export const GetUser = () => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -11,27 +12,34 @@ export const GetUser = () => {
         const token = localStorage.getItem("token");
         if (token) {
           console.log("Token:", token);
-          const response = await axios.get("http://localhost:5000/user", {
+          const response = await axios.get("http://localhost:5000/user/user", {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           });
 
           setUser(response.data);
-          console.log("user", user);
+
           setIsLoading(false);
         }
       } catch (error) {
         console.log(error);
         setIsLoading(false);
+        setError(error);
       }
     };
 
     fetchUser();
   }, []);
 
+  /*   useEffect(() => {
+    console.log("User:", user);
+  }, [user]); */
+
   if (isLoading) {
     return <div>Loading...</div>;
+  } else if (error) {
+    return <div>Error: {error.message}</div>;
   } else {
     return <div>{user ? user.username : "User not found"}</div>;
   }

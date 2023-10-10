@@ -1,16 +1,24 @@
 import React, { useState } from "react";
 import Dog from "../Assets/Dog";
 import { Link } from "react-router-dom";
-import { handleSubmit } from "../Api/Api";
+import { AuthContext } from "../Context/authContext";
+import { useContext } from "react";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const { login } = useContext(AuthContext);
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    handleSubmit(email, password, setError);
+    try {
+      await login(email, password, setError);
+      console.log("user logged in succesfull");
+    } catch (error) {
+      console.error("Login failed:", error);
+      setError("Login failed");
+    }
   };
 
   return (

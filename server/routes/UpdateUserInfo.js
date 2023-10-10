@@ -1,12 +1,17 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../Models/User");
+const authMiddleware = require("../utils/auth");
 
-// Define a route to handle updates
-router.post("/", async (req, res) => {
+router.put("/", authMiddleware, async (req, res) => {
   const { userId, username, email, password } = req.body;
 
   try {
+    // Ensure that the user making the request is the same as the one being updated
+    if (req.user.id !== userId) {
+      return res.status(403).json({ message: "Access forbidden" });
+    }
+
     // Find the user by userId
     const user = await User.findOne({ _id: userId });
 

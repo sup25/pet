@@ -1,17 +1,20 @@
 import React, { useState, useEffect, useContext } from "react";
-import { GetUser } from "../hooks/GetUser";
+import { AuthContext } from "../Context/authContext";
 import { AiFillCamera } from "react-icons/ai";
 import axios from "axios";
 import { ProfileContext } from "../Context/ProfileContext";
 
 const Account = () => {
   const { profilePicture, setProfilePicture } = useContext(ProfileContext);
-  const user = GetUser();
+  const { user, isLoading } = useContext(AuthContext);
+
   const [selectedFile, setSelectedFile] = useState(null);
   const [profileChanged, setProfileChanged] = useState(false);
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [ConfirmPassword, setConfirmPassword] = useState("");
 
   useEffect(() => {
     // Retrieve profile picture from local storage on component mount
@@ -78,13 +81,15 @@ const Account = () => {
     setSelectedFile(file);
     setProfileChanged(false);
   };
-  /*  const handleUpdateUserInfo = async () => {
+  const handleUpdateUserInfo = async () => {
+    console.log("save btn clicked");
     try {
       const updateData = {
         userId: user._id,
         username,
         email,
         password,
+        ConfirmPassword,
       };
       const token = localStorage.getItem("token");
       const config = {
@@ -92,8 +97,8 @@ const Account = () => {
           Authorization: `Bearer ${token}`,
         },
       };
-      const response = await axios.post(
-        "http://localhost:5000/updateUserInfo",
+      const response = await axios.put(
+        "http://localhost:5000/updateUserData",
         updateData,
         config
       );
@@ -103,7 +108,7 @@ const Account = () => {
     } catch (error) {
       console.log("error updating the data", error);
     }
-  }; */
+  };
 
   return (
     <div className="section py-20">
@@ -118,7 +123,7 @@ const Account = () => {
               />
             ) : (
               <div className="text-3xl">
-                {user ? user : "No profile Picuture"}
+                {user ? user.username : "No profile Picuture"}
               </div>
             )}
           </div>
@@ -163,7 +168,7 @@ const Account = () => {
               required
               placeholder="Name"
               className="w-full h-auto py-2 rounded-2xl flex px-4 border border-[#0d5b46]"
-              value={username} // Use the state value for username
+              value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
             <input
@@ -181,6 +186,7 @@ const Account = () => {
               required
               placeholder="Password"
               className="w-full h-auto py-2 rounded-2xl flex px-4 border border-[#0d5b46]"
+              onChange={(e) => setPassword(e.target.value)}
             />
             <input
               type="password"
@@ -188,13 +194,13 @@ const Account = () => {
               required
               placeholder="Reenter your Password"
               className="w-full h-auto py-2 rounded-2xl flex px-4 border border-[#0d5b46]"
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
-            {/* {errorMessage && <div className="text-red-500">{errorMessage}</div>} */}
+            {/*   {errorMessage && <div className="text-red-500">{errorMessage}</div>} */}
             <button
               type="submit"
               className="w-1/4 h-auto justify-center text-white font-bold text-xl py-1 rounded-3xl flex px-4 bg-[#0d5b46] hover:bg-[#199e7a]"
-              disabled={!selectedFile}
-              /*  onClick={handleUpdateUserInfo} */
+              onClick={handleUpdateUserInfo}
             >
               Save
             </button>

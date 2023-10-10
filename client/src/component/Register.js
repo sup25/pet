@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import DogLog from "../Assets/DogOut";
-import { registerUser } from "../Api/Api";
+import { registerUser } from "../Api/RegisterApi";
 
 export const Register = () => {
   const [formData, setFormData] = useState({

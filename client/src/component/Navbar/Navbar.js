@@ -5,8 +5,10 @@ import { GiHamburgerMenu, GiCancel } from "react-icons/gi";
 import { HiHome } from "react-icons/hi";
 import { FiLogIn, FiLogOut } from "react-icons/fi";
 import { IoMdPersonAdd } from "react-icons/io";
-import { GetUser } from "../../hooks/GetUser";
+
 import { ProfileContext } from "../../Context/ProfileContext";
+
+import { AuthContext } from "../../Context/authContext";
 
 const contents = [
   {
@@ -20,7 +22,10 @@ const contents = [
 ];
 
 const Navbar = () => {
-  const user = GetUser();
+  const { user, logout } = useContext(AuthContext);
+
+  console.log("user nav", user);
+
   const { profilePicture, setProfilePicture } = useContext(ProfileContext);
 
   const [show, setShow] = useState(false);
@@ -37,6 +42,7 @@ const Navbar = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("profilePicture");
     setProfilePicture("");
+    logout();
     window.location.reload();
   };
 
@@ -70,7 +76,7 @@ const Navbar = () => {
                           />
                         ) : (
                           <span className="text-white font-bold cursor-pointer justify-center border flex bg-slate-200/40  items-center text-xs rounded-full h-12 w-12 py-2 px-2 border-gray-400 ">
-                            {user}
+                            {user.username}
                           </span>
                         )}
                       </div>
@@ -129,7 +135,7 @@ const Navbar = () => {
                     <>
                       <div className="flex items-center justify-between flex-col">
                         <span className="text-black font-bold text-center border flex bg-slate-200/40  items-center text-xs rounded-full h-12 w-12 py-2 px-2 border-gray-400 ">
-                          {user}
+                          {user.username}
                         </span>{" "}
                         <button
                           className="py-2 px-2 flex  items-center justify-center"

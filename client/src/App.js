@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Routes, Route, Navigate, Link, Outlet } from "react-router-dom";
+
 import Login from "./component/Login";
 import { Register } from "./component/Register";
 import Navbar from "./component/Navbar/Navbar";
@@ -7,8 +8,8 @@ import { Footer } from "./component/Footer/Footer";
 import Pet from "./Pet";
 import Account from "./component/Account";
 import { ProfileProvider } from "./Context/ProfileContext";
-import { AuthProvider } from "./Context/authContext";
-import { GetUser } from "./hooks/GetUser";
+import { AuthContext, AuthProvider } from "./Context/authContext";
+
 import Dashboard from "./pages/Dashboard/Dashboard";
 import { PageNotFound } from "./pages/PageNotFound/PageNotFound";
 
@@ -22,7 +23,7 @@ const NotFound = () => {
 };
 
 const App = () => {
-  const { user, isLoading } = GetUser();
+  const { user, isLoading } = useContext(AuthContext);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -30,8 +31,8 @@ const App = () => {
 
   return (
     <>
-      <AuthProvider>
-        <ProfileProvider>
+      <ProfileProvider>
+        <AuthProvider>
           <Routes>
             <Route
               element={
@@ -55,8 +56,8 @@ const App = () => {
             <Route path="*" element={<NotFound />} />
             <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
-        </ProfileProvider>
-      </AuthProvider>
+        </AuthProvider>
+      </ProfileProvider>
     </>
   );
 };
