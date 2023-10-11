@@ -3,11 +3,13 @@ import { AuthContext } from "../Context/authContext";
 import { AiFillCamera } from "react-icons/ai";
 import axios from "axios";
 import { ProfileContext } from "../Context/ProfileContext";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const Account = () => {
   const { profilePicture, setProfilePicture } = useContext(ProfileContext);
   const { user, isLoading } = useContext(AuthContext);
-
+  const [showText, setShowText] = useState(false);
+  const [showTextConfirm, setShowTextConfirm] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [profileChanged, setProfileChanged] = useState(false);
 
@@ -82,7 +84,11 @@ const Account = () => {
     setProfileChanged(false);
   };
   const handleUpdateUserInfo = async () => {
-    console.log("save btn clicked");
+    if (password !== ConfirmPassword) {
+      console.log("password didnot match ");
+      return;
+    }
+
     try {
       const updateData = {
         userId: user._id,
@@ -180,22 +186,41 @@ const Account = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <input
-              type="password"
-              name="password"
-              required
-              placeholder="Password"
-              className="w-full h-auto py-2 rounded-2xl flex px-4 border border-[#0d5b46]"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <input
-              type="password"
-              name="reenterpassword"
-              required
-              placeholder="Reenter your Password"
-              className="w-full h-auto py-2 rounded-2xl flex px-4 border border-[#0d5b46]"
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
+            <div className="relative">
+              <input
+                type={showText ? "text" : "password"}
+                name="password"
+                required
+                placeholder="Password"
+                className="w-full h-auto py-2  rounded-2xl flex px-4 border border-[#0d5b46]"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <button
+                type="button"
+                onClick={() => setShowText(!showText)}
+                className="absolute inset-y-0 right-0 px-10 flex items-center focus:outline-none"
+              >
+                {showText ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+              </button>
+            </div>
+            <div className="relative">
+              <input
+                type={showTextConfirm ? "text" : "password"}
+                name="reenterpassword"
+                required
+                placeholder="Reenter your Password"
+                className="w-full h-auto py-2 rounded-2xl flex px-4 border border-[#0d5b46]"
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+              <button
+                type="button"
+                onClick={() => setShowTextConfirm(!showTextConfirm)}
+                className="absolute inset-y-0 right-0 px-10 flex items-center focus:outline-none"
+              >
+                {showTextConfirm ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+              </button>
+            </div>
             {/*   {errorMessage && <div className="text-red-500">{errorMessage}</div>} */}
             <button
               type="submit"
