@@ -44,7 +44,7 @@ export const AuthProvider = ({ children }) => {
         const token = response.data.token;
         localStorage.setItem("token", token);
 
-        window.location.href = "/";
+        window.location.href = "/dashboard";
       } else {
         setError("Invalid email or password");
       }

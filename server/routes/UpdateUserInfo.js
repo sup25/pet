@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../Models/User");
 const authMiddleware = require("../utils/auth");
+const bcrypt = require("bcrypt");
 
 router.put("/", authMiddleware, async (req, res) => {
   const { userId, username, email, password } = req.body;
@@ -22,7 +23,11 @@ router.put("/", authMiddleware, async (req, res) => {
     // Update user properties if provided in the request
     if (username) user.username = username;
     if (email) user.email = email;
-    if (password) user.password = password;
+    if (password) {
+      const saltRounds = 10;
+      const hashedPassword = await bcrypt.hash(password, saltRounds);
+      user.password = hashedPassword;
+    }
 
     // Save the updated user
     const updatedUser = await user.save();

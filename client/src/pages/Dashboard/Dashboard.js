@@ -70,7 +70,6 @@ const Dashboard = () => {
 
   return (
     <div className="bg-white h-screen">
-      <Navbar />
       {isuser && (
         <h1 className="text-3xl text-[#0d5b46] text-center py-8">
           Welcome {user}
@@ -195,21 +194,19 @@ const Dashboard = () => {
             ))}
           </ul>
         </div>
-        <div>
-          {showGallery && (
-            <div className="flex  justify-between flex-wrap gap-1  mt-4 w-full ">
-              {dogImages.map((imageUrl, index) => (
-                <div key={index} className="w-1/5 h-[300px] flex ">
-                  <img
-                    src={imageUrl}
-                    alt={`Dog ${index}`}
-                    className="w-full rounded"
-                  />
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+        {showGallery && (
+          <div className="flex  justify-between flex-wrap gap-1  mt-4 w-full ">
+            {dogImages.map((imageUrl, index) => (
+              <div key={index} className="w-1/5 h-[300px] flex ">
+                <img
+                  src={imageUrl}
+                  alt={`Dog ${index}`}
+                  className="w-full rounded"
+                />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

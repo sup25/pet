@@ -55,6 +55,13 @@ module.exports = {
           backgroundColor: "rgba(0, 0, 0, 0.5)",
           zIndex: "1",
         },
+        " .footer-container": {
+          position: "absolute",
+          bottom: "0",
+          left: "0",
+          width: "100%",
+          background: "#0d5b46",
+        },
       });
     }),
   ],
