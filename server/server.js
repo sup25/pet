@@ -7,6 +7,7 @@ const registerRoute = require("./routes/register");
 const userRoute = require("./routes/userRoute");
 const profileRoute = require("./routes/profile");
 const updateUserRoute = require("./routes/UpdateUserInfo");
+const postsRouter = require("./routes/post");
 
 const cors = require("cors");
 
@@ -39,6 +40,7 @@ app.use("/register", registerRoute);
 app.use("/user", userRoute);
 app.use("/profilePic", profileRoute);
 app.use("/updateUserData", updateUserRoute);
+app.use("/updatePost", postsRouter);
 
 const PORT = process.env.PORT || 5000;
 

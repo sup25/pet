@@ -24,8 +24,6 @@ const contents = [
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
 
-  console.log("user nav", user);
-
   const { profilePicture, setProfilePicture } = useContext(ProfileContext);
 
   const [show, setShow] = useState(false);
@@ -65,6 +63,7 @@ const Navbar = () => {
               <Link to="/">Home</Link>
               {user ? (
                 <>
+                  <Link to="/dashboard">Feed</Link>
                   <div className="" onClick={toggleDropdown}>
                     <div className="flex flex-col items-center justify-between ">
                       <div className="flex items-center justify-between">
