@@ -32,10 +32,6 @@ export const GetUser = () => {
     fetchUser();
   }, []);
 
-  /*   useEffect(() => {
-    console.log("User:", user);
-  }, [user]); */
-
   if (isLoading) {
     return <div>Loading...</div>;
   } else if (error) {

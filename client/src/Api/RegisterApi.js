@@ -1,11 +1,8 @@
 import axios from "axios";
-
+import { appConfig } from "../utils/AppConfig";
 export const registerUser = async (formData) => {
   try {
-    const response = await axios.post(
-      "http://localhost:5000/register",
-      formData
-    );
+    const response = await axios.post(`${appConfig.apiUrl}register`, formData);
     return response.data;
   } catch (error) {
     console.error(error);

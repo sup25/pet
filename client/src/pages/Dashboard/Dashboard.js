@@ -7,6 +7,7 @@ import {
   BsImageFill,
 } from "react-icons/bs";
 import axios from "axios";
+import { appConfig } from "../../utils/AppConfig";
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
@@ -35,9 +36,17 @@ const Dashboard = () => {
     petName: "",
     petType: "",
     petDescription: "",
+    petImage: "",
     author: "",
   });
 
+  console.log({
+    title: formData.petName,
+    content: formData.petDescription,
+    type: formData.petType,
+    image: formData.petImage,
+    author: user._id,
+  });
   const toggleForm = () => {
     setClickFill(!clickFill);
   };
@@ -53,10 +62,11 @@ const Dashboard = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:5000/updatePost", {
+      const response = await axios.post(`${appConfig.apiUrl}updatePost`, {
         title: formData.petName,
         content: formData.petDescription,
-        image: formData.petType,
+        type: formData.petType,
+        image: formData.petImage,
         author: user._id,
       });
       const createdPost = response.data;
@@ -65,12 +75,6 @@ const Dashboard = () => {
     } catch (error) {
       console.log("error posting", error);
     }
-
-    setFormData({
-      petName: "",
-      petType: "",
-      petDescription: "",
-    });
   };
 
   return (

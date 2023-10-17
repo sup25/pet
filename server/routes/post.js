@@ -7,6 +7,7 @@ router.post("/", async (req, res) => {
     const newPost = new Post({
       title: req.body.title,
       content: req.body.content,
+      type: req.body.type,
       image: req.body.image,
       author: req.body.author,
     });

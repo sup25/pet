@@ -5,25 +5,11 @@ import { GiHamburgerMenu, GiCancel } from "react-icons/gi";
 import { HiHome } from "react-icons/hi";
 import { FiLogIn, FiLogOut } from "react-icons/fi";
 import { IoMdPersonAdd } from "react-icons/io";
-
 import { ProfileContext } from "../../Context/ProfileContext";
-
 import { AuthContext } from "../../Context/authContext";
-
-const contents = [
-  {
-    link: <Link to="/login">Login</Link>,
-    icon: <FiLogIn className="w-auto h-8" />,
-  },
-  {
-    link: <Link to="/register">Register</Link>,
-    icon: <IoMdPersonAdd className="w-auto h-8" />,
-  },
-];
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
-
   const { profilePicture, setProfilePicture } = useContext(ProfileContext);
 
   const [show, setShow] = useState(false);
@@ -49,7 +35,7 @@ const Navbar = () => {
     if (storedProfilePicture) {
       setProfilePicture(storedProfilePicture);
     }
-  }, []);
+  }, [setProfilePicture]);
 
   return (
     <>
@@ -169,3 +155,14 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+const contents = [
+  {
+    link: <Link to="/login">Login</Link>,
+    icon: <FiLogIn className="w-auto h-8" />,
+  },
+  {
+    link: <Link to="/register">Register</Link>,
+    icon: <IoMdPersonAdd className="w-auto h-8" />,
+  },
+];

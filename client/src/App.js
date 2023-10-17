@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { Routes, Route, Navigate, Link, Outlet } from "react-router-dom";
-
 import Login from "./component/Login";
 import { Register } from "./component/Register";
 import Navbar from "./component/Navbar/Navbar";

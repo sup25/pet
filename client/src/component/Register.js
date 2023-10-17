@@ -22,9 +22,7 @@ export const Register = () => {
 
     try {
       const response = await registerUser(formData);
-      console.log(response); // Handle the response from the server
-
-      // Reset the form and clear any error messages
+      console.log(response);
       setFormData({ username: "", email: "", password: "" });
       setErrorMessage("");
       setSuccessMsg("User created successfully");
