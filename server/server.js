@@ -40,7 +40,7 @@ app.use("/register", registerRoute);
 app.use("/user", userRoute);
 app.use("/profilePic", profileRoute);
 app.use("/updateUserData", updateUserRoute);
-app.use("/updatePost", postsRouter);
+app.use("/Post", postsRouter);
 
 const PORT = process.env.PORT || 5000;
 
