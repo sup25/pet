@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../Context/authContext";
 import { AiFillCamera } from "react-icons/ai";
-import axios from "axios";
 import { ProfileContext } from "../Context/ProfileContext";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { ProfilePictureUpload, UpdateUserInfo } from "../hooks/UpdateAccount";
 
 const Account = () => {
   const { profilePicture, setProfilePicture } = useContext(ProfileContext);
@@ -19,7 +19,6 @@ const Account = () => {
   const [ConfirmPassword, setConfirmPassword] = useState("");
 
   useEffect(() => {
-    // Retrieve profile picture from local storage on component mount
     const storedProfilePicture = localStorage.getItem("profilePicture");
     if (storedProfilePicture) {
       setProfilePicture(storedProfilePicture);
@@ -32,45 +31,18 @@ const Account = () => {
   }, [user]);
 
   const handleProfilePictureUpload = async () => {
-    if (selectedFile) {
-      try {
-        const formData = new FormData();
-        formData.append("profilePicture", selectedFile);
+    const imageURL = await ProfilePictureUpload(selectedFile);
 
-        const token = localStorage.getItem("token");
-        const config = {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        };
+    if (imageURL) {
+      // Update the profile picture in the state
+      setProfilePicture(imageURL);
 
-        const response = await axios.post(
-          "http://localhost:5000/ProfilePic",
-          formData,
-          config
-        );
-        // Extract the profile picture URL from the response
-        const imageURL = response.data.profilePicture;
+      // Set profileChanged to true after successful upload
+      setProfileChanged(true);
 
-        // Update the profile picture in the state
-        setProfilePicture(imageURL);
-
-        // Save the profile picture URL to local storage
-        localStorage.setItem("profilePicture", imageURL);
-
-        // Set profileChanged to true after successful upload
-        setProfileChanged(true);
-
-        setTimeout(() => {
-          setProfileChanged(false);
-        }, 5000);
-      } catch (error) {
-        console.error("Error uploading profile picture:", error);
-      }
-    } else {
-      // No selected file, reset the profile picture state and show the option to upload again
-      setProfilePicture(null);
-      setSelectedFile(null);
+      setTimeout(() => {
+        setProfileChanged(false);
+      }, 5000);
     }
   };
 
@@ -84,35 +56,16 @@ const Account = () => {
     setProfileChanged(false);
   };
   const handleUpdateUserInfo = async () => {
-    if (password !== ConfirmPassword) {
-      console.log("password didnot match ");
-      return;
-    }
+    const response = await UpdateUserInfo(
+      user,
+      username,
+      email,
+      password,
+      ConfirmPassword
+    );
 
-    try {
-      const updateData = {
-        userId: user._id,
-        username,
-        email,
-        password,
-        ConfirmPassword,
-      };
-      const token = localStorage.getItem("token");
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      const response = await axios.put(
-        "http://localhost:5000/updateUserData",
-        updateData,
-        config
-      );
-
-      console.log("User updated:", response.data);
-      window.location.replace("/");
-    } catch (error) {
-      console.log("error updating the data", error);
+    if (response) {
+      console.log(response);
     }
   };
 
