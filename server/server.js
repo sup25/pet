@@ -8,7 +8,8 @@ const userRoute = require("./routes/userRoute");
 const profileRoute = require("./routes/profile");
 const updateUserRoute = require("./routes/UpdateUserInfo");
 const postsRouter = require("./routes/post");
-
+const deleteRouter = require("./routes/deletePost");
+const updateRouter = require("./routes/updatePost");
 const cors = require("cors");
 
 const bodyParser = require("body-parser");
@@ -41,6 +42,8 @@ app.use("/user", userRoute);
 app.use("/profilePic", profileRoute);
 app.use("/updateUserData", updateUserRoute);
 app.use("/Post", postsRouter);
+app.use("/deletePost", deleteRouter);
+app.use("/updatePost", updateRouter);
 
 const PORT = process.env.PORT || 5000;
 

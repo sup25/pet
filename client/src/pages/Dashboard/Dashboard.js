@@ -54,8 +54,15 @@ const Dashboard = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+
     if (user && user._id) {
-      makePost(formData, user._id, setPosts, posts);
+      makePost(formData, user._id, setPosts, posts)
+        .then(() => {
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.error("Error making a post:", error);
+        });
     } else {
       console.error("User is undefined or missing _id property.");
     }
@@ -94,17 +101,6 @@ const Dashboard = () => {
         user={user}
       />
 
-      <div className="mt-8">
-        <ul className="space-y-4">
-          {posts.map((post, index) => (
-            <li key={index} className="bg-gray-100 p-4 rounded shadow">
-              <h3 className="text-lg font-semibold">{post.title}</h3>
-              <p className="mb-2">Type: {post.image}</p>
-              <p>Description: {post.content}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
       {showGallery && (
         <div className="flex  justify-between flex-wrap gap-1  mt-4 w-full ">
           {dogImages.map((imageUrl, index) => (
