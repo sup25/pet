@@ -19,7 +19,6 @@ export const GetPost = () => {
       try {
         const token = localStorage.getItem("token");
         if (token) {
-          console.log("Token:", token);
           const response = await axios.get(`${appConfig.apiUrl}Post`, {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -47,7 +46,12 @@ export const GetPost = () => {
       if (token) {
         const response = await deletePost(token, postId);
         console.log("Post deleted:", response);
-        setPostDeleted(true);
+
+        // Filter out the deleted post from the current user's posts
+        const updatedPosts = posts.filter((post) => post._id !== postId);
+
+        // Update the state with the filtered array
+        setPosts(updatedPosts);
       }
     } catch (error) {
       console.error("Error deleting post:", error);

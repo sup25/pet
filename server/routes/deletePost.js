@@ -22,14 +22,18 @@ router.delete("/:postId", async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Use the `author` field to identify and delete posts by the user
-    const result = await Post.deleteMany({ author: userId });
+    const postId = req.params.postId;
 
-    if (result.deletedCount === 0) {
-      return res.status(404).json({ message: "No posts found for this user." });
+    // Check if the post exists and belongs to the user
+    const post = await Post.findOne({ _id: postId, author: userId });
+    if (!post) {
+      return res.status(404).json({ message: "Post not found " });
     }
 
-    res.status(200).json({ message: "User's posts deleted successfully" });
+    // Delete the post
+    await Post.findByIdAndDelete(postId);
+
+    res.status(200).json({ message: "Post deleted successfully" });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Server error" });
