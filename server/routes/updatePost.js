@@ -22,35 +22,35 @@ router.put("/:id", async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Find all posts by the user
-    const userPosts = await Post.find({ author: userId });
+    const postId = req.params.id; // Get the post ID from the URL
 
-    if (userPosts.length === 0) {
-      return res.status(404).json({ message: "No posts found for this user." });
+    // Find the post by its ID
+    const post = await Post.findOne({ _id: postId, author: userId });
+
+    if (!post) {
+      return res.status(404).json({ message: "Post not found for this user." });
     }
 
-    // Update each post with the data from the request body
-    for (const post of userPosts) {
-      if (req.body.title) {
-        post.title = req.body.title;
-      }
-      if (req.body.content) {
-        post.content = req.body.content;
-      }
-      if (req.body.type) {
-        post.type = req.body.type;
-      }
-      if (req.body.image) {
-        post.image = req.body.image;
-      }
-
-      // Save the updated post
-      await post.save();
+    // Update the post with the data from the request body
+    if (req.body.title) {
+      post.title = req.body.title;
+    }
+    if (req.body.content) {
+      post.content = req.body.content;
+    }
+    if (req.body.type) {
+      post.type = req.body.type;
+    }
+    if (req.body.image) {
+      post.image = req.body.image;
     }
 
-    res.status(200).json({ message: "User's posts updated successfully" });
+    // Save the updated post
+    await post.save();
+
+    res.status(200).json({ message: "Post updated successfully" });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.status(500).json({ message: "Server error" });
   }
 });
