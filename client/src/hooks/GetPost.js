@@ -69,28 +69,35 @@ export const GetPost = () => {
     setEditingPostId(null);
   };
 
-  const handleUpdatePost = async (postId, updatedData) => {
-    try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        console.error("Token is missing.");
-        return;
-      }
-      const updatePostUrl = `${appConfig.apiUrl}UpdatePost/${postId}`;
-      const response = await axios.put(updatePostUrl, updatedData, {
+  const handleUpdatePost = (postId) => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.error("Token is missing.");
+      return;
+    }
+
+    const updatePostUrl = `${appConfig.apiUrl}UpdatePost/${postId}`;
+
+    axios
+      .put(updatePostUrl, editedPost, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      });
+      })
+      .then((response) => {
+        console.log("Post updated successfully:", response.data);
 
-      // Update the post in the state with the response data
-      const updatedPosts = posts.map((post) =>
-        post._id === postId ? response.data.updatedPost : post
-      );
-      setPosts(updatedPosts);
-    } catch (error) {
-      console.error("Error updating post:", error);
-    }
+        // Update the state with the updated post
+        const updatedPosts = posts.map((post) =>
+          post._id === postId ? response.data.updatedPost : post
+        );
+
+        setPosts(updatedPosts);
+        setEditingPostId(null);
+      })
+      .catch((error) => {
+        console.error("Error updating post:", error);
+      });
   };
 
   if (isLoading) {
