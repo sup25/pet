@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 const User = require("../Models/User");
 const Post = require("../Models/Post");
 
-// Update a post
 router.put("/:id", async (req, res) => {
   try {
     const authHeader = req.headers.authorization;
@@ -23,7 +22,7 @@ router.put("/:id", async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const postId = req.params.id; // Get the post ID from the URL
+    const postId = req.params.id;
 
     // Find the post by its ID
     const post = await Post.findOne({ _id: postId, author: userId });
@@ -33,10 +32,18 @@ router.put("/:id", async (req, res) => {
     }
 
     // Update the post with the data from the request body
-    post.title = req.body.title || post.title;
-    post.content = req.body.content || post.content;
-    post.type = req.body.type || post.type;
-    post.image = req.body.image || post.image;
+    if (req.body.title) {
+      post.title = req.body.title;
+    }
+    if (req.body.content) {
+      post.content = req.body.content;
+    }
+    if (req.body.type) {
+      post.type = req.body.type;
+    }
+    if (req.body.image) {
+      post.image = req.body.image;
+    }
 
     // Save the updated post
     await post.save();

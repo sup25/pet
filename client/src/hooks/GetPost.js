@@ -94,6 +94,7 @@ export const GetPost = () => {
 
         setPosts(updatedPosts);
         setEditingPostId(null);
+        setEditedPost({});
       })
       .catch((error) => {
         console.error("Error updating post:", error);
