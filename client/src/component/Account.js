@@ -174,7 +174,7 @@ const Account = () => {
                 {showTextConfirm ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
               </button>
             </div>
-            {/*   {errorMessage && <div className="text-red-500">{errorMessage}</div>} */}
+
             <button
               type="submit"
               className="w-1/4 h-auto justify-center text-white font-bold text-xl py-1 rounded-3xl flex px-4 bg-[#0d5b46] hover:bg-[#199e7a]"
