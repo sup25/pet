@@ -23,34 +23,28 @@ router.put("/:id", async (req, res) => {
     }
 
     const postId = req.params.id;
+    const updatedPostData = {
+      title: req.body.title,
+      content: req.body.content,
+      type: req.body.type,
+      image: req.body.image,
+      author: userId,
+    };
 
-    // Find the post by its ID
-    const post = await Post.findOne({ _id: postId, author: userId });
+    // Find the post by its ID and the author's ID
+    const updatedPost = await Post.findOneAndUpdate(
+      { _id: postId, author: userId },
+      { $set: updatedPostData },
+      { new: true }
+    );
 
-    if (!post) {
-      return res.status(404).json({ message: "Post not found for this user." });
+    if (!updatedPost) {
+      return res
+        .status(404)
+        .json({ message: "Post not found or unauthorized." });
     }
 
-    // Update the post with the data from the request body
-    if (req.body.title) {
-      post.title = req.body.title;
-    }
-    if (req.body.content) {
-      post.content = req.body.content;
-    }
-    if (req.body.type) {
-      post.type = req.body.type;
-    }
-    if (req.body.image) {
-      post.image = req.body.image;
-    }
-
-    // Save the updated post
-    await post.save();
-
-    res
-      .status(200)
-      .json({ message: "Post updated successfully", updatedPost: post });
+    res.status(200).json({ message: "Post updated successfully", updatedPost });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error" });
