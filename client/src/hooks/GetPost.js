@@ -12,7 +12,6 @@ export const GetPost = () => {
   const [postDeleted, setPostDeleted] = useState(false);
 
   const [editingPostId, setEditingPostId] = useState(null);
-  const [editedPost, setEditedPost] = useState({});
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -60,41 +59,45 @@ export const GetPost = () => {
 
   const handleEdit = (postId) => {
     setEditingPostId(postId);
-    // Find the post being edited and store its data in editedPost state
-    const postToEdit = posts.find((post) => post._id === postId);
-    setEditedPost({ ...postToEdit });
   };
 
   const handleCancelEdit = () => {
     setEditingPostId(null);
   };
 
-  const handleUpdatePost = (postId) => {
+  const handleUpdatePost = (updatedPost) => {
     const token = localStorage.getItem("token");
     if (!token) {
       console.error("Token is missing.");
       return;
     }
 
-    const updatePostUrl = `${appConfig.apiUrl}UpdatePost/${postId}`;
+    const updatePostUrl = `${appConfig.apiUrl}UpdatePost/${updatedPost._id}`;
 
     axios
-      .put(updatePostUrl, editedPost, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .put(
+        updatePostUrl,
+        { ...updatedPost },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((response) => {
         console.log("Post updated successfully:", response.data);
 
-        // Update the state with the updated post
-        const updatedPosts = posts.map((post) =>
-          post._id === postId ? response.data.updatedPost : post
+        // Find the index of the updated post in the posts array
+        const updatedIndex = posts.findIndex(
+          (post) => post._id === response.data.updatedPost._id
         );
+
+        // Update the state with the updated post
+        const updatedPosts = [...posts];
+        updatedPosts[updatedIndex] = response.data.updatedPost;
 
         setPosts(updatedPosts);
         setEditingPostId(null);
-        setEditedPost({});
       })
       .catch((error) => {
         console.error("Error updating post:", error);
@@ -115,23 +118,17 @@ export const GetPost = () => {
                 className="flex flex-col gap-4 shadow p-2 justify-between hover:bg-gray-100 rounded"
                 key={post._id}
               >
-                <h2>
-                  {post._id === editingPostId ? editedPost.title : post.title}
-                </h2>
-                <h2>
-                  {post._id === editingPostId ? editedPost.type : post.type}
-                </h2>
+                <h2>{post._id === editingPostId ? post.title : post.title}</h2>
+                <h2>{post._id === editingPostId ? post.type : post.type}</h2>
                 <p>
-                  {post._id === editingPostId
-                    ? editedPost.content
-                    : post.content}
+                  {post._id === editingPostId ? post.content : post.content}
                 </p>
 
                 <div className="flex gap-2">
                   {editingPostId === post._id ? (
                     <UpdatePost
-                      post={editedPost}
-                      onSave={() => handleUpdatePost(post._id)}
+                      post={post}
+                      onSave={handleUpdatePost}
                       onCancel={handleCancelEdit}
                     />
                   ) : (
