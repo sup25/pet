@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { appConfig } from "../utils/AppConfig";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
-import { deletePost } from "../Modules/DeletePost";
-import UpdatePost from "../Modules/UpdatePost";
+import { deletePost } from "../hooks/DeletePost";
+import UpdatePost from "./UpdatePost";
 
 export const GetPost = () => {
   const [posts, setPosts] = useState([]);

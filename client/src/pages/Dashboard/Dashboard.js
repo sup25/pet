@@ -6,7 +6,7 @@ import {
   BsFillPatchPlusFill,
   BsImageFill,
 } from "react-icons/bs";
-import { GetPost } from "../../hooks/GetPost";
+import { GetPost } from "../../Modules/GetPost";
 import { makePost } from "../../hooks/MakePost";
 import CreatePost from "../../Modules/CreatePost";
 
