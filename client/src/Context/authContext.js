@@ -6,7 +6,7 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const { profilePicture, setProfilePicture } = useContext(ProfileContext);
+  const { profilePicture, updateProfilePicture } = useContext(ProfileContext);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -67,7 +67,7 @@ export const AuthProvider = ({ children }) => {
         login,
         logout,
         profilePicture,
-        setProfilePicture,
+        updateProfilePicture,
         isLoading,
       }}
     >

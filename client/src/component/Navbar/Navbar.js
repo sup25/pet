@@ -10,7 +10,7 @@ import { AuthContext } from "../../Context/authContext";
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
-  const { profilePicture, setProfilePicture } = useContext(ProfileContext);
+  const { profilePicture } = useContext(ProfileContext);
 
   const [show, setShow] = useState(false);
   const toggleMenu = () => {
@@ -24,18 +24,9 @@ const Navbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("profilePicture");
-    setProfilePicture("");
     logout();
     window.location.reload();
   };
-
-  useEffect(() => {
-    const storedProfilePicture = localStorage.getItem("profilePicture");
-    if (storedProfilePicture) {
-      setProfilePicture(storedProfilePicture);
-    }
-  }, [setProfilePicture]);
 
   return (
     <>

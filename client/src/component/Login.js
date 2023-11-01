@@ -3,12 +3,14 @@ import Dog from "../Assets/Dog";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Context/authContext";
 import { useContext } from "react";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const { login } = useContext(AuthContext);
+  const [showText, setShowText] = useState(false);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -46,15 +48,24 @@ const Login = () => {
             placeholder="Email"
             className="w-4/5 h-auto py-2 rounded-2xl flex px-4 border border-[#0d5b46]"
           />
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            placeholder="Password"
-            className="w-4/5 h-auto py-2 rounded-2xl flex px-4 border border-[#0d5b46]"
-          />
+          <div className="relative w-full">
+            <input
+              type={showText ? "text" : "password"}
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              placeholder="Password"
+              className="w-4/5 h-auto py-2 rounded-2xl flex px-4 border border-[#0d5b46]"
+            />
+            <button
+              type="button"
+              onClick={() => setShowText(!showText)}
+              className="absolute inset-y-0 md:right-24 right-10 px-10 flex items-center focus:outline-none"
+            >
+              {showText ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+            </button>
+          </div>
           {error && <p className="text-red-500">{error}</p>}
           <button
             type="submit"

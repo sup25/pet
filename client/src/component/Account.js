@@ -6,7 +6,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { ProfilePictureUpload, UpdateUserInfo } from "../hooks/UpdateAccount";
 
 const Account = () => {
-  const { profilePicture, setProfilePicture } = useContext(ProfileContext);
+  const { profilePicture, updateProfilePicture } = useContext(ProfileContext);
   const { user, isLoading } = useContext(AuthContext);
   const [showText, setShowText] = useState(false);
   const [showTextConfirm, setShowTextConfirm] = useState(false);
@@ -19,9 +19,8 @@ const Account = () => {
   const [ConfirmPassword, setConfirmPassword] = useState("");
 
   useEffect(() => {
-    const storedProfilePicture = localStorage.getItem("profilePicture");
-    if (storedProfilePicture) {
-      setProfilePicture(storedProfilePicture);
+    if (profilePicture) {
+      setSelectedFile(profilePicture);
     }
     if (user) {
       setUsername(user?.username || "");
@@ -35,7 +34,7 @@ const Account = () => {
 
     if (imageURL) {
       // Update the profile picture in the state
-      setProfilePicture(imageURL);
+      updateProfilePicture(imageURL);
 
       // Set profileChanged to true after successful upload
       setProfileChanged(true);
@@ -76,13 +75,17 @@ const Account = () => {
           <div className="w-[300px] h-[250px] flex flex-col items-center justify-center bg-gray-300 rounded-t-xl shadow-xl">
             {profilePicture ? (
               <img
-                src={selectedFile ? URL.createObjectURL(selectedFile) : ""}
+                src={
+                  selectedFile
+                    ? URL?.createObjectURL(selectedFile)
+                    : profilePicture
+                }
                 alt="ProfilePicture"
                 className="w-full h-full object-cover"
               />
             ) : (
               <div className="text-3xl">
-                {user ? user.username : "No profile Picuture"}
+                {user ? user.username : "No profile Picture"}
               </div>
             )}
           </div>
