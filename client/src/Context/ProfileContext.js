@@ -19,13 +19,13 @@ export const ProfileProvider = ({ children }) => {
   };
 
   // Optionally, you can use a cleanup effect to remove the profile picture from local storage when the user logs out
-  useEffect(() => {
+  /*  useEffect(() => {
     return () => {
       // Clear the profile picture from local storage when the user logs out
       localStorage.removeItem("profilePicture");
       console.log("Removed from local storage.");
     };
-  }, []);
+  }, []); */
 
   return (
     <ProfileContext.Provider value={{ profilePicture, updateProfilePicture }}>

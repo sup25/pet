@@ -7,37 +7,45 @@ import { ProfilePictureUpload, UpdateUserInfo } from "../hooks/UpdateAccount";
 
 const Account = () => {
   const { profilePicture, updateProfilePicture } = useContext(ProfileContext);
-  const { user, isLoading } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [showText, setShowText] = useState(false);
   const [showTextConfirm, setShowTextConfirm] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [profileChanged, setProfileChanged] = useState(false);
-
+  const [imageURL, setImageURL] = useState(null);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
 
   useEffect(() => {
-    if (profilePicture) {
-      setSelectedFile(profilePicture);
+    const storedProfilePicture = localStorage.getItem("profilePicture");
+
+    if (profilePicture || storedProfilePicture) {
+      setImageURL(profilePicture || storedProfilePicture);
     }
+
     if (user) {
       setUsername(user?.username || "");
       setEmail(user?.email || "");
     }
-    console.log("user", user);
-  }, [user]);
+  }, [user, profilePicture]);
 
   const handleProfilePictureUpload = async () => {
     const imageURL = await ProfilePictureUpload(selectedFile);
 
     if (imageURL) {
-      // Update the profile picture in the state
+      // Update the profile picture in the state and context
       updateProfilePicture(imageURL);
+
+      // Store the updated profile picture in local storage
+      localStorage.setItem("profilePicture", imageURL);
 
       // Set profileChanged to true after successful upload
       setProfileChanged(true);
+
+      // Set the image URL to display the newly uploaded image
+      setImageURL(imageURL);
 
       setTimeout(() => {
         setProfileChanged(false);
@@ -95,9 +103,9 @@ const Account = () => {
             htmlFor="fileInput"
             className="w-[300px] cursor-pointer h-12 gap-2 justify-center text-xl text-white font-bold rounded flex items-center bg-[#0d5b46]"
           >
-            {profilePicture ? <AiFillCamera /> : ""}
+            {imageURL ? <AiFillCamera /> : ""}
             <span className="flex justify-center items-center">
-              {profilePicture ? "Change profile" : "Upload profile picture"}
+              {imageURL ? "Change profile" : "Upload profile picture"}
             </span>
           </label>
           <input
