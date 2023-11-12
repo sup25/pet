@@ -25,7 +25,7 @@ const Login = () => {
 
   return (
     <div className="section py-10 items-center flex-wrap">
-      <div className="flex py-5 flex-col md:flex-row w-full h-auto gap-5 bg-white rounded-2xl shadow-xl">
+      <div className=" container flex py-5 flex-col md:flex-row w-full h-auto gap-5 bg-white rounded-2xl shadow-xl">
         <div className="flex justify-center">
           <Dog className="md:w-full w-4/5 h-auto" />
         </div>
@@ -48,24 +48,24 @@ const Login = () => {
             placeholder="Email"
             className="w-4/5 h-auto py-2 rounded-2xl flex px-4 border border-[#0d5b46]"
           />
-          <div className="relative w-full">
-            <input
-              type={showText ? "text" : "password"}
-              name="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              placeholder="Password"
-              className="w-4/5 h-auto py-2 rounded-2xl flex px-4 border border-[#0d5b46]"
-            />
-            <button
-              type="button"
-              onClick={() => setShowText(!showText)}
-              className="absolute inset-y-0 md:right-24 right-10 px-10 flex items-center focus:outline-none"
-            >
-              {showText ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
-            </button>
-          </div>
+
+          <input
+            type={showText ? "text" : "password"}
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            placeholder="Password"
+            className="w-4/5 h-auto py-2 rounded-2xl flex px-4 border border-[#0d5b46] relative"
+          />
+          <button
+            type="button"
+            onClick={() => setShowText(!showText)}
+            className="absolute  md:right-24 right-14 flex items-center"
+          >
+            {showText ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+          </button>
+
           {error && <p className="text-red-500">{error}</p>}
           <button
             type="submit"
