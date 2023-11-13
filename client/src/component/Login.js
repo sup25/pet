@@ -58,13 +58,13 @@ const Login = () => {
             placeholder="Password"
             className="w-4/5 h-auto py-2 rounded-2xl flex px-4 border border-[#0d5b46] relative"
           />
-          <button
-            type="button"
+
+          <div
             onClick={() => setShowText(!showText)}
             className="absolute  md:right-24 right-14 flex items-center"
           >
             {showText ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
-          </button>
+          </div>
 
           {error && <p className="text-red-500">{error}</p>}
           <button
