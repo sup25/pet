@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import DogLog from "../Assets/DogOut";
 import { registerUser } from "../Api/RegisterApi";
-
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 export const Register = () => {
   const [formData, setFormData] = useState({
     username: "",
@@ -12,6 +12,14 @@ export const Register = () => {
 
   const [errorMessage, setErrorMessage] = useState("");
   const [successMsg, setSuccessMsg] = useState();
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const shouldShowToggle = "password";
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -66,15 +74,26 @@ export const Register = () => {
               onChange={handleChange}
               className="w-full h-auto py-2 rounded-2xl flex px-4 border border-[#0d5b46]"
             />
-            <input
-              type="password"
-              name="password"
-              required
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleChange}
-              className="w-full h-auto py-2 rounded-2xl flex px-4 border border-[#0d5b46]"
-            />
+            <div className="relative w-full">
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                required
+                placeholder="Password"
+                value={formData.password}
+                onChange={handleChange}
+                className="w-full h-auto py-2 rounded-2xl flex px-4 border border-[#0d5b46]"
+              />
+
+              {shouldShowToggle && (
+                <div
+                  className="absolute cursor-pointer top-3 left-3/4 md:left-[90%] "
+                  onClick={togglePasswordVisibility}
+                >
+                  {showPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
+                </div>
+              )}
+            </div>
             {errorMessage && <div className="text-red-500">{errorMessage}</div>}
             {successMsg && <div className="text-green-500">{errorMessage}</div>}
             <button
