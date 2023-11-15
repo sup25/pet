@@ -7,6 +7,7 @@ import { FiLogIn, FiLogOut } from "react-icons/fi";
 import { IoMdPersonAdd } from "react-icons/io";
 import { ProfileContext } from "../../Context/ProfileContext";
 import { AuthContext } from "../../Context/authContext";
+import NavModule from "./NavModule";
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
@@ -27,12 +28,11 @@ const Navbar = () => {
     logout();
     window.location.reload();
   };
-
   return (
     <>
-      <div className="bg-[#0d5b46] h-20 section flex justify-between items-center shadow-[0_5px_10px_0px_rgba(0,0,0,0.5)]">
-        <div className="container flex items-center">
-          <div className="container flex justify-between items-center">
+      <div className="bg-[#0d5b46] h-20 section flex  items-center shadow-[0_5px_10px_0px_rgba(0,0,0,0.5)]">
+        <div className="container flex items-center ">
+          <div className="flex items-center justify-between w-full">
             <Link to="/">
               <Logo className="w-44 h-auto" />
             </Link>
@@ -56,26 +56,7 @@ const Navbar = () => {
                           </span>
                         )}
                       </div>
-                      {expanded && (
-                        <>
-                          <div className="py-4 px-2 bg-[#0d5b46] rounded-3xl text-base flex-col items-center justify-center absolute top-16 z-50">
-                            <div>
-                              <Link
-                                to="/account"
-                                className="flex gap-3 hover:text-orange-300 flex-col border-b-2 border-gray-300 rounded"
-                              >
-                                Account
-                              </Link>
-                            </div>
-                            <button onClick={handleLogout}>
-                              <div className="flex hover:text-orange-300 mt-3 items-center border-b-2 border-gray-300 rounded">
-                                <FiLogOut />
-                                Logout
-                              </div>
-                            </button>
-                          </div>
-                        </>
-                      )}
+                      {expanded && <NavModule handleLogout={handleLogout} />}
                     </div>
                   </div>
                 </>
