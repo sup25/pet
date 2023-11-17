@@ -46,7 +46,10 @@ const App = () => {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               {user ? (
-                <Route path="/dashboard" element={<Dashboard />} />
+                <>
+                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/account" element={<Account />} />
+                </>
               ) : (
                 <Route
                   path="/dashboard"
@@ -54,11 +57,6 @@ const App = () => {
                 />
               )}
             </Route>
-            {user ? (
-              <Route path="/account" element={<Account />} />
-            ) : (
-              <Route path="/account" element={<Navigate to="/404" replace />} />
-            )}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>
