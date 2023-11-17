@@ -26,7 +26,7 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     logout();
-    window.location.reload();
+    window.location.href = "/";
   };
   return (
     <>

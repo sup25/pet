@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import Tooltip from "../../utils/Tooltip";
 import { AuthContext } from "../../Context/authContext";
+import Bookmarks from "./Bookmarks";
 import {
   BsFillBookmarkHeartFill,
   BsFillPatchPlusFill,
@@ -16,6 +17,7 @@ const Dashboard = () => {
   const [dogImages, setDogImages] = useState([]);
   const [showGallery, setShowGallery] = useState(false);
   const [clickFill, setClickFill] = useState(false);
+  const [bookmarkedImages, setBookmarkedImages] = useState([]);
 
   useEffect(() => {
     const fetchDogImages = async () => {
@@ -67,6 +69,10 @@ const Dashboard = () => {
       console.error("User is undefined or missing _id property.");
     }
   };
+  const handleBookmarkClick = (imageUrl) => {
+    // Update the state with the bookmarked image
+    setBookmarkedImages((prevImages) => [...prevImages, imageUrl]);
+  };
 
   return (
     <div className="container mx-auto mt-5 pb-20 px-4">
@@ -110,10 +116,17 @@ const Dashboard = () => {
                 alt={`Dog ${index}`}
                 className="w-full rounded "
               />
+              <button
+                className="p-2 bg-red-400"
+                onClick={() => handleBookmarkClick(imageUrl)}
+              >
+                bookmark
+              </button>
             </div>
           ))}
         </div>
       )}
+      <Bookmarks images={bookmarkedImages} />
       <GetPost />
     </div>
   );
