@@ -110,23 +110,29 @@ const Dashboard = () => {
       {showGallery && (
         <div className="flex  justify-between flex-wrap gap-1  mt-4 w-full ">
           {dogImages.map((imageUrl, index) => (
-            <div key={index} className="w-1/5 h-[300px] flex ">
+            <div
+              key={index}
+              className="max-w-[200px] w-full flex items-center flex-col gap-2 mb-4 "
+            >
               <img
                 src={imageUrl}
                 alt={`Dog ${index}`}
                 className="w-full rounded "
               />
-              <button
-                className="p-2 bg-red-400"
-                onClick={() => handleBookmarkClick(imageUrl)}
-              >
-                bookmark
-              </button>
+
+              <div className="w-full">
+                <BsFillBookmarkHeartFill
+                  className="w-8 h-auto text-black cursor-pointer "
+                  onClick={() => handleBookmarkClick(imageUrl)}
+                />
+              </div>
             </div>
           ))}
         </div>
       )}
-      <Bookmarks images={bookmarkedImages} />
+      <div>
+        <Bookmarks images={bookmarkedImages} />
+      </div>
       <GetPost />
     </div>
   );
