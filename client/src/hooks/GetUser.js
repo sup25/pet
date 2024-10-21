@@ -12,7 +12,7 @@ export const GetUser = () => {
         const token = localStorage.getItem("token");
         if (token) {
           console.log("Token:", token);
-          const response = await axios.get("http://localhost:5000/user/user", {
+          const response = await axios.get("http://localhost:8000/user/user", {
             headers: {
               Authorization: `Bearer ${token}`,
             },
