@@ -3,7 +3,7 @@ const { JWT_SECRET, JWT_REFRESH_SECRET } = process.env;
 
 // generate a JWT token for a given user ID
 const generateToken = (userId) => {
-  const accessToken = jwt.sign({ userId }, JWT_SECRET, { expiresIn: "1h" });
+  const accessToken = jwt.sign({ userId }, JWT_SECRET, { expiresIn: 120 });
   const refreshToken = jwt.sign({ userId }, JWT_REFRESH_SECRET, {
     expiresIn: "7d",
   });
